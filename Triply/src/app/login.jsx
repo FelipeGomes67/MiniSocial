@@ -51,6 +51,7 @@ export default function Login() {
 
           <Text style={loginStyle.esqueceuSenha}>Esqueceu a senha?</Text>
 
+
           <Botao botao="Entrar" onPress={() => router.push('/login')} />
 
           <View style={loginStyle.dividerContainer}>
