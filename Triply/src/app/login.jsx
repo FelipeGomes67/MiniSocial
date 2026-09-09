@@ -1,17 +1,19 @@
 import { Text, View, TouchableOpacity, Image, TextInput } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context"; // Importação do SafeAreaView
 import { loginStyle } from "../styles/loginStyle.js";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import logo from "../../assets/Logo.png";
 import { useState } from "react";
 import Botao from "../components/botao/botao.jsx";
+import BotaoGoogle from "../components/botaoGoogle/botaogoogle.jsx";
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
       <View style={loginStyle.container}>
 
         <TouchableOpacity onPress={() => router.back()} style={loginStyle.buttonBack}>
@@ -23,7 +25,6 @@ export default function Login() {
 
         <View style={loginStyle.formContainer}>
           <View style={loginStyle.inputContainer}>
-
             <Text style={loginStyle.text}>E-mail</Text>
             <TextInput
               style={loginStyle.input}
@@ -35,8 +36,8 @@ export default function Login() {
               onChangeText={setEmail}
             />
           </View>
-          <View style={loginStyle.inputContainer}>
 
+          <View style={loginStyle.inputContainer}>
             <Text style={loginStyle.text}>Senha</Text>
             <TextInput
               style={loginStyle.input}
@@ -49,9 +50,12 @@ export default function Login() {
             />
           </View>
 
-          <Text style={loginStyle.esqueceuSenha}>Esqueceu a senha?</Text>
+          <TouchableOpacity onPress={() => router.push("/esqueceuSenha")}>
 
-          <Botao botao="Entrar" onPress={() => router.push('/login')} />
+          <Text style={loginStyle.esqueceuSenha} >Esqueceu a senha?</Text>
+          </TouchableOpacity>
+
+          <Botao botao="Entrar" onPress={() => router.replace('/home')} />
 
           <View style={loginStyle.dividerContainer}>
             <View style={loginStyle.line} />
@@ -59,16 +63,16 @@ export default function Login() {
             <View style={loginStyle.line} />
           </View>
 
-          <Botao botao="Entrar com Google" onPress={() => { }} />
+          <BotaoGoogle onPress={() => { }} />
 
           <Text style={loginStyle.signupText}>
-            Não tem uma conta?{""}
+            Não tem uma conta?{" "}
             <Text style={loginStyle.signupLink} onPress={() => router.push("/cadastro")}>
               Cadastre-se
             </Text>
           </Text>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
