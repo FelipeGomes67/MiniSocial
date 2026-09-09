@@ -48,5 +48,9 @@ export const esqueceuSenhaStyle = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 30,
+    fontFamily: "RedHatText_400Regular",
   },
+  fonte: {
+    fontFamily: "RedHatText_400Regular",
+  }
 });

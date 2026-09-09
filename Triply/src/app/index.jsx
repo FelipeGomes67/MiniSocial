@@ -20,9 +20,9 @@ export default function Index() {
       <SafeAreaView style={indexStyle.container}>
         <Image source={logo} style={indexStyle.logo} />
 
-        <Text style={indexStyle.tittle}>Bem-Vindo à Triply</Text>
+        <Text style={[indexStyle.tittle, indexStyle.fonte]}>Bem-Vindo à Triply</Text>
 
-        <Text style={indexStyle.text}>
+        <Text style={[indexStyle.text, indexStyle.fonte]}>
           Conecte-se, compartilhe momentos e registre suas viagens.
           Encontre pessoas, salve inspirações e mostre onde você está para o mundo.
         </Text>

@@ -32,7 +32,8 @@ export const homeStyle = StyleSheet.create({
     borderColor: "#000000",
     borderWidth: 1,
     borderRadius: 8,
-    padding: 16,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
     marginBottom: 20,
     marginRight: 20,
     flexDirection: "column",
@@ -96,6 +97,9 @@ export const homeStyle = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 10,
-    marginLeft: 167,
+    marginLeft: 150,
+  },
+  fonte: {
+    fontFamily: "RedHatText_400Regular",
   },
 });

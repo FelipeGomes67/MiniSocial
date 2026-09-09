@@ -35,14 +35,12 @@ export const indexStyle = StyleSheet.create({
     marginBottom: 25,
     textAlign: "center",
     color: "#FFFFFF",
-    fontFamily: "RedHatText_700Bold",
   },
   text: {
     fontSize: 15,
     textAlign: "center",
     marginBottom: 40,
     color: "#E0E0E0",
-    fontFamily: "RedHatText_400Regular",
     lineHeight: 22,
     width: "85%",
   },
@@ -52,5 +50,8 @@ export const indexStyle = StyleSheet.create({
     gap: 20,
     alignItems: "center",
     justifyContent: "center",
+  },
+  fonte: {
+    fontFamily: "RedHatText_400Regular",
   },
 });

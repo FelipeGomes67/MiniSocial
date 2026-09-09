@@ -21,11 +21,11 @@ export default function Login() {
         </TouchableOpacity>
 
         <Image source={logo} style={loginStyle.image} />
-        <Text style={loginStyle.title}>Entrar</Text>
+        <Text style={[loginStyle.title, loginStyle.fonte]}>Entrar</Text>
 
         <View style={loginStyle.formContainer}>
           <View style={loginStyle.inputContainer}>
-            <Text style={loginStyle.text}>E-mail</Text>
+            <Text style={[loginStyle.text, loginStyle.fonte]}>E-mail</Text>
             <TextInput
               style={loginStyle.input}
               placeholder="Digite seu e-mail"
@@ -38,7 +38,7 @@ export default function Login() {
           </View>
 
           <View style={loginStyle.inputContainer}>
-            <Text style={loginStyle.text}>Senha</Text>
+            <Text style={[loginStyle.text, loginStyle.fonte]}>Senha</Text>
             <TextInput
               style={loginStyle.input}
               placeholder="Digite sua senha"
@@ -52,22 +52,22 @@ export default function Login() {
 
           <TouchableOpacity onPress={() => router.push("/esqueceuSenha")}>
 
-          <Text style={loginStyle.esqueceuSenha} >Esqueceu a senha?</Text>
+          <Text style={[loginStyle.esqueceuSenha, loginStyle.fonte]} >Esqueceu a senha?</Text>
           </TouchableOpacity>
 
           <Botao botao="Entrar" onPress={() => router.replace('/home')} />
 
           <View style={loginStyle.dividerContainer}>
             <View style={loginStyle.line} />
-            <Text style={loginStyle.dividerText}>OU</Text>
+            <Text style={[loginStyle.dividerText, loginStyle.fonte]}>OU</Text>
             <View style={loginStyle.line} />
           </View>
 
           <BotaoGoogle onPress={() => { }} />
 
-          <Text style={loginStyle.signupText}>
+          <Text style={[loginStyle.signupText, loginStyle.fonte]}>
             Não tem uma conta?{" "}
-            <Text style={loginStyle.signupLink} onPress={() => router.push("/cadastro")}>
+            <Text style={[loginStyle.signupLink, loginStyle.fonte]} onPress={() => router.push("/cadastro")}>
               Cadastre-se
             </Text>
           </Text>

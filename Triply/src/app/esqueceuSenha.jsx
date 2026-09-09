@@ -20,15 +20,15 @@ export default function EsqueceuSenha() {
         </TouchableOpacity>
 
         <Image source={logo} style={esqueceuSenhaStyle.image} />
-        <Text style={esqueceuSenhaStyle.title}>Esqueceu a senha?</Text>
+        <Text style={[esqueceuSenhaStyle.title, esqueceuSenhaStyle.fonte]}>Esqueceu a senha?</Text>
         <Image source={cadeado} style={esqueceuSenhaStyle.imageCadeado} />
 
         <View style={esqueceuSenhaStyle.formContainer}>
-          <Text style={esqueceuSenhaStyle.text}>Encontre sua Conta</Text>
-          <Text style={esqueceuSenhaStyle.textNorm}>Insira seu email cadastrado para receber o código de recuperação</Text>
+          <Text style={[esqueceuSenhaStyle.text, esqueceuSenhaStyle.fonte]}>Encontre sua Conta</Text>
+          <Text style={[esqueceuSenhaStyle.textNorm, esqueceuSenhaStyle.fonte]}>Insira seu email cadastrado para receber o código de recuperação</Text>
 
           <View style={esqueceuSenhaStyle.inputContainer}>
-            <Text style={esqueceuSenhaStyle.text}>E-mail</Text>
+            <Text style={[esqueceuSenhaStyle.text, esqueceuSenhaStyle.fonte]}>E-mail</Text>
             <TextInput
               style={esqueceuSenhaStyle.input}
               placeholder="Digite seu e-mail"
