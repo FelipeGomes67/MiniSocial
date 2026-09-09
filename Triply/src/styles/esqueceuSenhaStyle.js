@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const loginStyle = StyleSheet.create({
+export const esqueceuSenhaStyle = StyleSheet.create({
   container: {
     paddingVertical: 20,
     paddingHorizontal: 20,
@@ -12,10 +12,16 @@ export const loginStyle = StyleSheet.create({
     marginTop: 20,
     borderRadius: 5
   },
+  imageCadeado: {
+    width: 85,
+    height: 85,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 25,
+    marginBottom: 15,
     color: "#FF6600",
     textAlign: "center",
   },
@@ -28,48 +34,23 @@ export const loginStyle = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    marginBottom: 5,
     fontWeight: "bold",
+    marginBottom: 5,
+  },
+  textNorm: {
+    fontSize: 14,
+    marginBottom: 15,
+    color: '#9B9B9B',
   },
   input: {
     borderWidth: 1,
     borderColor: '#CCCCCC',
     borderRadius: 5,
     padding: 10,
+    marginBottom: 30,
     fontFamily: "RedHatText_400Regular",
-  },
-  esqueceuSenha: {
-    fontSize: 14,
-    color: '#FF6600',
-    marginBottom: 20,
-  },
-  dividerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 20,
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#CCCCCC',
-  },
-  dividerText: {
-    marginHorizontal: 15,
-    fontSize: 14,
-    color: '#888888',
-    fontWeight: 'bold',
-  },
-  signupText: {
-    fontSize: 14,
-    color: '#666666',
-    textAlign: 'center',
-    marginTop: 20,
-  },
-  signupLink: {
-    color: '#FF6600',
-    fontWeight: 'bold',
   },
   fonte: {
     fontFamily: "RedHatText_400Regular",
-  },
+  }
 });

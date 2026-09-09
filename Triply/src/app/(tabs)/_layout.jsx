@@ -18,6 +18,7 @@ export default function TabsLayout() {
         },
         tabBarLabelStyle: {
           fontSize: 10,
+          fontFamily: "RedHatText_400Regular",
         },
       }}
     >
