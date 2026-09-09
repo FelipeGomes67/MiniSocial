@@ -48,6 +48,7 @@ export const indexStyle = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
+    alignItems: "stretch",
     gap: 20,
     alignItems: "center",
     justifyContent: "center",

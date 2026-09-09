@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 
-export const botaoStyles = StyleSheet.create({
+export const botaoStyle = StyleSheet.create({
   button: {
     backgroundColor: "#FD7509",
     height: 40,
-    width: 350,
+    width: '100%',
     justifyContent: "center",
-    borderRadius: 5,
     alignItems: "center",
+    borderRadius: 5,
   },
   buttonText: {
     fontFamily: "RedHatText_400Regular",
@@ -18,7 +18,7 @@ export const botaoStyles = StyleSheet.create({
   buttonCadastrar: {
     backgroundColor: 'Transparent',
     height: 40,
-    width: 350,
+    width: '100%',
     justifyContent: "center",
     borderRadius: 5,
     alignItems: "center",

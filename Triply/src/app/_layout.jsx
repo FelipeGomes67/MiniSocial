@@ -13,6 +13,7 @@ export default function Layout() {
                 <Stack.Screen name="index" />
                 <Stack.Screen name="login" />
                 <Stack.Screen name="cadastro" />
+                <Stack.Screen name="esqueceuSenha" />
                 <Stack.Screen name="(tabs)" />
             </Stack>
         </SafeAreaProvider>
