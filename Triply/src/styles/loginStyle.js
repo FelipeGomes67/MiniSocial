@@ -20,7 +20,8 @@ export const loginStyle = StyleSheet.create({
     textAlign: "center",
   },
   formContainer: {
-    marginTop: 20,
+    width: "100%",
+    alignItems: "stretch"
   },
   inputContainer: {
     marginBottom: 15,
@@ -28,6 +29,7 @@ export const loginStyle = StyleSheet.create({
   text: {
     fontSize: 16,
     marginBottom: 5,
+    fontWeight: "bold",
   },
   input: {
     borderWidth: 1,
