@@ -1,21 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const homeStyle = StyleSheet.create({
+  container: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
   },
 
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
-
-  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -97,7 +92,7 @@ export const homeStyle = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 10,
-    marginLeft: 150,
+    marginLeft: 180,
   },
   fonte: {
     fontFamily: "RedHatText_400Regular",
