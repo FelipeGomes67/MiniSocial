@@ -1,15 +1,20 @@
 import { Stack } from "expo-router";
-import { StackScreen } from "react-native-screens";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function Layout() {
     return (
-        <Stack
-            screenOptions={{
-                headerShown: false,
-            }}
-        >
-            <Stack.Screen name="index" />
-            <Stack.Screen name="(tabs)" />
-        </Stack>
+        <SafeAreaProvider>
+            <Stack
+                screenOptions={{
+                    headerShown: false,
+                    contentStyle: { backgroundColor: "#FFFFFF" },
+                }}
+            >
+                <Stack.Screen name="index" />
+                <Stack.Screen name="login" />
+                <Stack.Screen name="cadastro" />
+                <Stack.Screen name="(tabs)" />
+            </Stack>
+        </SafeAreaProvider>
     );
 }
