@@ -66,4 +66,5 @@ export const loginStyle = StyleSheet.create({
     color: '#FF6600',
     fontWeight: 'bold',
   },
+  
 });
