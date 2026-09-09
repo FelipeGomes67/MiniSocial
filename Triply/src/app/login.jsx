@@ -52,10 +52,15 @@ export default function Login() {
 
           <TouchableOpacity onPress={() => router.push("/esqueceuSenha")}>
 
+
+
+          <Botao botao="Entrar" onPress={() => router.push('/login')} />
+
           <Text style={[loginStyle.esqueceuSenha, loginStyle.fonte]} >Esqueceu a senha?</Text>
           </TouchableOpacity>
 
           <Botao botao="Entrar" onPress={() => router.replace('/home')} />
+
 
           <View style={loginStyle.dividerContainer}>
             <View style={loginStyle.line} />
