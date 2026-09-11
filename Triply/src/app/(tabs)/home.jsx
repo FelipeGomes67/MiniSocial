@@ -9,6 +9,9 @@ export default function Home() {
       <View style={homeStyle.header}>
         <Image source={require("../../../assets/Logo.png")} style={homeStyle.image} />
         <Text style={homeStyle.title}>Triply</Text>
+        <TouchableOpacity style={homeStyle.botaoPesquisar}>
+          <Ionicons name="search-sharp" size={24} color="#000000" />
+        </TouchableOpacity>
       </View>
 
       <ScrollView>
