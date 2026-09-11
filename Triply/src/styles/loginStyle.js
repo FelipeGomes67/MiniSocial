@@ -36,6 +36,7 @@ export const loginStyle = StyleSheet.create({
     borderColor: '#CCCCCC',
     borderRadius: 5,
     padding: 10,
+    fontFamily: "RedHatText_400Regular",
   },
   esqueceuSenha: {
     fontSize: 14,
@@ -50,7 +51,7 @@ export const loginStyle = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: '#CCCCCC', 
+    backgroundColor: '#CCCCCC',
   },
   dividerText: {
     marginHorizontal: 15,
@@ -68,5 +69,7 @@ export const loginStyle = StyleSheet.create({
     color: '#FF6600',
     fontWeight: 'bold',
   },
-  
+  fonte: {
+    fontFamily: "RedHatText_400Regular",
+  },
 });
