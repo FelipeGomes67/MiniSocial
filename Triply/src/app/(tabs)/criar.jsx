@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
-import { Text, View, TouchableOpacity, Image, TextInput, Modal } from "react-native";
+import { Text, View, TouchableOpacity, Image, TextInput, Modal, Alert } from "react-native";
 import { criarStyle } from "../../styles/criarStyle";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import Botao from "../../components/botao/botao";
+import * as Location from "expo-location";
 
 export default function Criar() {
   const [texto, setTexto] = useState("");
@@ -13,7 +14,68 @@ export default function Criar() {
   const [cameraAberta, setCameraAberta] = useState(false);
   const [opcoesAbertas, setOpcoesAbertas] = useState(false); // menu "Tirar foto / Galeria"
   const [permission, requestPermission] = useCameraPermissions();
+  const [localizacao, setLocalizacao] = useState("");
   const cameraRef = useRef(null);
+
+  async function PegarLocalizacao() {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status !== "granted") {
+        Alert("Permissão para acessar sua localização foi negada.");
+        return;
+      }
+
+      const local = await Location.getCurrentPositionAsync({});
+
+      const endereco = await Location.reverseGeocodeAsync({
+        latitude: local.coords.latitude,
+        longitude: local.coords.longitude,
+      });
+
+      if (endereco.length > 0) {
+        const dados = endereco[0];
+
+        const enderecoFormatado = [
+          dados.street,
+          dados.streetNumber,
+          dados.district,
+          dados.city,
+          dados.region,
+        ]
+          .filter(Boolean)
+          .join(", ");
+
+        setTexto((textoAtual) => {
+          if (textoAtual.trim() == "") {
+            return `📍 ${enderecoFormatado}`;
+          }
+
+
+          return `${textoAtual}\n📍 ${enderecoFormatado}`;
+        })
+      }
+    } catch (error) {
+      console.log("Erro ao pegar localização", erro);
+      alert("Não foi possível obter sua localização.");
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Abre o menu de opções ao tocar em "Imagem"
   function abrirOpcoesImagem() {
@@ -90,11 +152,18 @@ export default function Criar() {
           <Text style={criarStyle.colorText}>Imagem</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={criarStyle.botaoLocalizacao}>
+        <TouchableOpacity style={criarStyle.botaoLocalizacao} onPress={PegarLocalizacao}>
           <Ionicons name="location-outline" size={24} color="#000000" />
           <Text style={criarStyle.colorText}>Localização</Text>
         </TouchableOpacity>
       </View>
+
+      {localizacao && (
+        <View style={{ marginTop: 15 }}>
+          <Text>Localização:</Text>
+          <Text>{localizacao}</Text>
+        </View>
+      )}
 
       <View style={criarStyle.containerBotaoPublicar}>
         <Botao botao="Publicar"></Botao>

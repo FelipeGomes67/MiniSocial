@@ -38,6 +38,7 @@ import PenIcon from '../../../assets/Icons/PenIcon.png';
 import SenttingsIcon from '../../../assets/Icons/SenttingsIcon.png';
 
 import { useProfile } from '../../context/ProfileContext';
+import { router } from 'expo-router';
 
 const baseFont = Platform.select({
   ios: 'System',
@@ -1811,8 +1812,7 @@ function AccountSettings({
               title="Sair da conta"
               danger
               onPress={() => {
-                setMessage('');
-                setStep('logout');
+                router.replace("/boas-vindas")
               }}
             />
           </>
@@ -2287,6 +2287,7 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+    paddingVertical: 20,
   },
 
   screen: {

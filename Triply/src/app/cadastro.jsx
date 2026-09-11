@@ -73,14 +73,14 @@ export default function Cadastro() {
 
         </View>
 
-        <TouchableOpacity style={cadastroStyle.button} onPress={() => router.push("/notificacoes")}>
+        <TouchableOpacity style={cadastroStyle.button} onPress={() => router.push("/(tabs)")}>
           <Text style={cadastroStyle.buttonText}>Criar Conta</Text>
         </TouchableOpacity>
 
         <View style={cadastroStyle.footer}>
         <Text style={cadastroStyle.signupText}>
           Já tem uma conta?{""}
-          <Text style={cadastroStyle.signupLink} onPress={() => router.push("/notificacoes")}>
+          <Text style={cadastroStyle.signupLink} onPress={() => router.push("/(tabs)")}>
             Entrar
           </Text>
         </Text>

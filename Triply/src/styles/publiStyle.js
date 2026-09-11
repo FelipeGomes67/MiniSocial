@@ -17,7 +17,8 @@ export const publiStyle = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "#FD7509",
-    paddingLeft: 110,
+    paddingLeft: 80,
+    paddingRight: 70,
     // textAlign: "center"
   },
   subtitle: {

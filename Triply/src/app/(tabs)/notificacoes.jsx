@@ -35,7 +35,7 @@ export default function Notificacoes() {
 
                 <View style={notificacoesStyle.linhaNome}>
                   <Text style={notificacoesStyle.nome}>
-                    Fulano
+                    Torolho
                   </Text>
 
                   <Text style={notificacoesStyle.horario}>
@@ -64,7 +64,7 @@ export default function Notificacoes() {
 
                 <View style={notificacoesStyle.linhaNome}>
                   <Text style={notificacoesStyle.nome}>
-                    Fulano
+                    Torolho
                   </Text>
 
                   <Text style={notificacoesStyle.horario}>
@@ -92,7 +92,7 @@ export default function Notificacoes() {
 
                 <View style={notificacoesStyle.linhaNome}>
                   <Text style={notificacoesStyle.nome}>
-                    Fulano
+                    Torolho
                   </Text>
 
                   <Text style={notificacoesStyle.horario}>
@@ -122,7 +122,7 @@ export default function Notificacoes() {
 
                 <View style={notificacoesStyle.linhaNome}>
                   <Text style={notificacoesStyle.nome}>
-                    Fulano
+                    Torolho
                   </Text>
 
                   <Text style={notificacoesStyle.horario}>
@@ -151,7 +151,7 @@ export default function Notificacoes() {
 
                 <View style={notificacoesStyle.linhaNome}>
                   <Text style={notificacoesStyle.nome}>
-                    Fulano
+                    Torolho
                   </Text>
 
                   <Text style={notificacoesStyle.horario}>

@@ -1,3 +1,4 @@
+
 import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { homeStyle } from "../../../styles/homeStyle";
@@ -8,21 +9,24 @@ import { router } from "expo-router";
 
 
 export default function Publicacao() {
-
+    
     return (
         <SafeAreaView style={publiStyle.container}>
             <ScrollView contentContainerStyle={publiStyle.scrollContent} showsVerticalScrollIndicator={false}>
                 <View style={publiStyle.header}>
 
-                    <TouchableOpacity onPress={() => router.replace("/(tabs)")} style={publiStyle.buttonBack}>
+       <TouchableOpacity onPress={() => router.back("/index")} style={publiStyle.buttonBack}>
+          
+
                         <Ionicons name="chevron-back-outline" size={28} color="#FF6600" />
                     </TouchableOpacity>
 
 
 
                     <Text style={[publiStyle.title, publiStyle.fonte]}>Publicação</Text>
+                        <Ionicons name="share-social" size={28} color="#000000" />
                 </View>
-
+                
                 <View style={publiStyle.cardPublicacao}>
                     <View style={publiStyle.linhaPerfil}>
                         <View style={publiStyle.cardPerfil}>
@@ -42,17 +46,18 @@ export default function Publicacao() {
 
                     <View style={publiStyle.botaoCurtir}>
                         <TouchableOpacity style={publiStyle.botaoCurtir}>
-                            <Ionicons name="heart" size={24} color="#000000" />
+                            <Ionicons name="heart-outline" size={24} color="#000000" />
                             <Text style={[publiStyle.fonte]}>100</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={publiStyle.botaoComentar}>
-                            <Ionicons name="chatbubble" size={24} color="#000000" />
+                            <Ionicons name="chatbubble-ellipses-outline" size={24} color="#000000" />
                             <Text style={[publiStyle.fonte]}>33</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={publiStyle.botaoSalvar}>
                             <Ionicons name="bookmark-outline" size={24} color="#000000" />
+                            <Text style={[publiStyle.fonte]}>33</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

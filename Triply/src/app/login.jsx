@@ -29,7 +29,7 @@ export default function Login() {
 
         if (usuarioEncontrado.senha === senha) {
           console.log("Login realizado com sucesso:", usuarioEncontrado);
-          router.replace("/home");
+          router.replace("/(tabs)");
         } else {
           Alert.alert("Erro", "Senha incorreta.");
         }

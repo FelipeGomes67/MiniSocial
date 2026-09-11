@@ -4,10 +4,10 @@ export const CURRENT_USER_ID = 1;
 const users = [
   {
     id: 1,
-    name: 'Késsia Milena',
-    username: 'kessia.milena',
-    bio: 'Desenvolvedora e entusiasta de tecnologia. Compartilhando projetos e aprendizados.',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=80',
+    name: 'Felipe Torolho',
+    username: 'torolhinho',
+    bio: 'Desenvolvedor e entusiasta de futebol. Torço para o são paulo.',
+    avatar: '{https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=80}',
     followers: [2],
     following: [2],
     favoritePosts: [1, 3],

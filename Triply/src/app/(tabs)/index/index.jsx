@@ -10,7 +10,7 @@ export default function Home() {
       <View style={homeStyle.header}>
         <Image source={require("../../../../assets/Logo.png")} style={homeStyle.image} />
         <Text style={homeStyle.title}>Triply</Text>
-        <TouchableOpacity style={homeStyle.botaoPesquisar}>
+        <TouchableOpacity style={homeStyle.botaoPesquisar} onPress={() => { router.replace('/pesquisa') }}>
           <Ionicons name="search-sharp" size={24} color="#000000" />
         </TouchableOpacity>
       </View>
@@ -35,18 +35,19 @@ export default function Home() {
 
           <View style={homeStyle.botaoCurtir}>
             <TouchableOpacity style={homeStyle.botaoCurtir}>
-              <Ionicons name="heart" size={24} color="#000000" />
+              <Ionicons name="heart-outline" size={24} color="#000000" />
               <Text style={[homeStyle.fonte]}>100</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={homeStyle.botaoComentar}>
-              <Ionicons name="chatbubble" size={24} color="#000000" />
+              <Ionicons name="chatbubble-ellipses-outline" size={24} color="#000000" />
               <Text style={[homeStyle.fonte]}>33</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={homeStyle.botaoSalvar}>
               <Ionicons name="bookmark-outline" size={24} color="#000000" />
               <Text style={[homeStyle.fonte]}>33</Text>
+
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
@@ -69,12 +70,12 @@ export default function Home() {
 
           <View style={homeStyle.botaoCurtir}>
             <TouchableOpacity style={homeStyle.botaoCurtir}>
-              <Ionicons name="heart" size={24} color="#000000" />
+              <Ionicons name="heart-outline" size={24} color="#000000" />
               <Text style={[homeStyle.fonte]}>100</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={homeStyle.botaoComentar}>
-              <Ionicons name="chatbubble" size={24} color="#000000" />
+              <Ionicons name="chatbubble-ellipses-outline" size={24} color="#000000" />
               <Text style={[homeStyle.fonte]}>33</Text>
             </TouchableOpacity>
 
