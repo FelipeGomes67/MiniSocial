@@ -3,21 +3,22 @@ import { Ionicons } from "@expo/vector-icons";
 import { homeStyle } from "../../styles/homeStyle";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
-
 export default function Home() {
   return (
     <SafeAreaView style={homeStyle.container}>
       <View style={homeStyle.header}>
         <Image source={require("../../../assets/Logo.png")} style={homeStyle.image} />
-        <Text style={[homeStyle.title, homeStyle.fonte]}>Triply</Text>
+        <Text style={homeStyle.title}>Triply</Text>
+        <TouchableOpacity style={homeStyle.botaoPesquisar}>
+          <Ionicons name="search-sharp" size={24} color="#000000" />
+        </TouchableOpacity>
       </View>
 
       <ScrollView>
         <View style={homeStyle.cardPublicacao}>
           <View style={homeStyle.linhaPerfil}>
             <View style={homeStyle.cardPerfil}>
-              <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}>P</Text>
+              <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}></Text>
             </View>
 
             <View style={homeStyle.infoPerfil}>
@@ -51,7 +52,7 @@ export default function Home() {
         <View style={homeStyle.cardPublicacao}>
           <View style={homeStyle.linhaPerfil}>
             <View style={homeStyle.cardPerfil}>
-              <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}>P</Text>
+              <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}></Text>
             </View>
 
             <View style={homeStyle.infoPerfil}>
