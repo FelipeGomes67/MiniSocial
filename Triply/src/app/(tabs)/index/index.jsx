@@ -14,8 +14,8 @@ export default function Home() {
           <Ionicons name="search-sharp" size={24} color="#000000" />
         </TouchableOpacity>
       </View>
-<ScrollView>
-        <TouchableOpacity style={homeStyle.cardPublicacao}   onPress={() => {router.push ({ pathname: "/[id]"})}}>
+      <ScrollView>
+        <TouchableOpacity style={homeStyle.cardPublicacao} onPress={() => { router.push({ pathname: "/[id]" }) }}>
           <View style={homeStyle.linhaPerfil}>
             <View style={homeStyle.cardPerfil}>
               <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}></Text>
