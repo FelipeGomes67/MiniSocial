@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const cadastroStyle = StyleSheet.create({
-     title: {
+  title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 50,
@@ -24,40 +24,44 @@ export const cadastroStyle = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
   },
-    signupLink: {
-    color: '#FF6600',
-    fontWeight: 'bold',
+  footer: {
+    alignItems: "center",
+    marginTop: 30,
+    paddingBottom: 15,
   },
-    signupText: {
-    fontSize: 14,
+
+  signupLink: {
+    color: '#FF6600',
+    fontWeight: '700',
+  },
+  signupText: {
+    fontSize: 16,
     color: '#666666',
     textAlign: 'center',
-    marginTop: 100,
   },
   container: {
     paddingVertical: 20,
     paddingHorizontal: 20,
   },
-    button: {
+  button: {
     marginTop: 30,
     backgroundColor: "#FD7509",
-    height: 40,
-    width: 350,
+    height: 45,
+    width: "100%",
     justifyContent: "center",
     borderRadius: 5,
     alignItems: "center",
   },
   buttonText: {
-    fontFamily: "RedHatText_400Regular",
     color: "#FFFFFF",
-    fontSize: 13,
-    fontWeight: 600,
+    fontSize: 20,
+    fontWeight: 300,
   },
-    image: {
-    width: 45,
-    height: 45,
+  image: {
+    width: 40,
+    height: 40,
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: 20,
     borderRadius: 5
   },
 });
