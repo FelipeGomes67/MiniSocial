@@ -8,34 +8,34 @@ export default function TabsLayout() {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={styles.container}>
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-
-          tabBarActiveTintColor: '#FD7509',
-          tabBarInactiveTintColor: '#888888',
-
-          tabBarHideOnKeyboard: true,
-
-          tabBarStyle: [
-            styles.tabBar,
-            {
-              height: 64 + insets.bottom,
-              paddingBottom: Math.max(
-                insets.bottom,
-                8
-              ),
-            },
-          ],
-
-          tabBarLabelStyle: styles.label,
-
-          tabBarItemStyle: styles.item,
-
-          tabBarShowLabel: true,
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#FF6600", 
+        tabBarInactiveTintColor: "#888888",
+        tabBarStyle: {
+          height: 65,
+          paddingBottom: 8,
+          paddingTop: 6,
+          borderTopWidth: 1,
+          borderTopColor: "#E5E5E5",
+          backgroundColor: "#FFFFFF",
+        },
+        tabBarLabelStyle: {
+          fontSize: 10,
+          fontFamily: "RedHatText_400Regular",
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home-outline" size={size} color={color} />
+          ),
         }}
-      >
+      />
         <Tabs.Screen
           name="home"
           options={{
@@ -124,7 +124,6 @@ export default function TabsLayout() {
           }}
         />
       </Tabs>
-    </View>
   );
 }
 
