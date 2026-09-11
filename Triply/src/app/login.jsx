@@ -1,5 +1,5 @@
-import { Text, View, TouchableOpacity, Image, TextInput } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context"; // Importação do SafeAreaView
+import { Text, View, TouchableOpacity, Image, TextInput, Alert } from "react-native"; // 1. Importado Alert aqui
+import { SafeAreaView } from "react-native-safe-area-context";
 import { loginStyle } from "../styles/loginStyle.js";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,10 +7,40 @@ import logo from "../../assets/Logo.png";
 import { useState } from "react";
 import Botao from "../components/botao/botao.jsx";
 import BotaoGoogle from "../components/botaoGoogle/botaogoogle.jsx";
+import api from "../service/service.js";
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+
+  const login = async () => {
+    if (!email || !senha) {
+      Alert.alert("Aviso", "Preencha todos os campos!");
+      return;
+    }
+
+    const emailLimpo = email.trim().toLowerCase();
+
+    try {
+        const response = await api.get(`/usuarios?email=${emailLimpo}`);
+
+      if (response.data.length > 0) {
+        const usuarioEncontrado = response.data[0];
+
+        if (usuarioEncontrado.senha === senha) {
+          console.log("Login realizado com sucesso:", usuarioEncontrado);
+          router.replace("/home");
+        } else {
+          Alert.alert("Erro", "Senha incorreta.");
+        }
+      } else {
+        Alert.alert("Erro", "E-mail não encontrado.");
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      Alert.alert("Erro", "Não foi possível conectar ao servidor.");
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
@@ -51,16 +81,11 @@ export default function Login() {
           </View>
 
           <TouchableOpacity onPress={() => router.push("/esqueceuSenha")}>
-
-
-
-          <Botao botao="Entrar" onPress={() => router.push('/login')} />
-
-          <Text style={[loginStyle.esqueceuSenha, loginStyle.fonte]} >Esqueceu a senha?</Text>
+            <Text style={[loginStyle.esqueceuSenha, loginStyle.fonte]}>Esqueceu a senha?</Text>
           </TouchableOpacity>
 
-          <Botao botao="Entrar" onPress={() => router.replace('/home')} />
-
+          {/* 2. Chamando a função de login no onPress */}
+          <Botao botao="Entrar" onPress={login} />
 
           <View style={loginStyle.dividerContainer}>
             <View style={loginStyle.line} />
