@@ -2,12 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const homeStyle = StyleSheet.create({
     header: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginBottom: 20,
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 20,
     },
-
+    
     container: {
+      flex: 1,
         paddingHorizontal: 20,
         paddingVertical: 20,
     },
