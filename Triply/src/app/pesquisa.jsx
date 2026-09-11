@@ -1,5 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, TextInput, ScrollView, Pressable, Animated, Easing } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+  Pressable,
+  Animated,
+  Easing,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useNavigation } from 'expo-router';
@@ -23,25 +31,25 @@ const sugestoesInicio = [
     id: 'sug-1',
     nome: 'Estados Unidos',
     icone: 'search-outline',
-    tipo: 'destino'
+    tipo: 'destino',
   },
   {
     id: 'sug-2',
     nome: 'Estados Unidos',
     icone: 'search-outline',
-    tipo: 'destino'
+    tipo: 'destino',
   },
   {
     id: 'sug-3',
     nome: 'Estados Unidos',
     icone: 'search-outline',
-    tipo: 'destino'
+    tipo: 'destino',
   },
   {
     id: 'sug-4',
     nome: 'Fidalgo.k2',
     icone: 'person-outline',
-    tipo: 'usuario'
+    tipo: 'usuario',
   },
 ];
 
@@ -50,13 +58,13 @@ const sugestoesExtras = [
     id: 'sug-5',
     nome: 'Japão',
     icone: 'search-outline',
-    tipo: 'destino'
+    tipo: 'destino',
   },
   {
     id: 'sug-6',
     nome: 'Tailândia',
     icone: 'search-outline',
-    tipo: 'destino'
+    tipo: 'destino',
   },
 ];
 
@@ -64,22 +72,22 @@ const pesquisasPopulares = [
   {
     id: 'pop-1',
     nome: 'Fidalgo.k2',
-    icone: 'person-outline'
+    icone: 'person-outline',
   },
   {
     id: 'pop-2',
     nome: 'São Paulo',
-    icone: 'time-outline'
+    icone: 'time-outline',
   },
   {
     id: 'pop-3',
     nome: 'São Paulo',
-    icone: 'time-outline'
+    icone: 'time-outline',
   },
   {
     id: 'pop-4',
     nome: 'São Paulo',
-    icone: 'time-outline'
+    icone: 'time-outline',
   },
 ];
 
@@ -99,7 +107,11 @@ export default function Pesquisa() {
   const pressAnimations = useRef({});
 
   const handleGoBack = () => {
-    router.navigate("/(tabs)");
+    if (navigation?.canGoBack?.()) {
+      navigation.goBack();
+    } else {
+      router.push('/');
+    }
   };
 
   const listaRecentes = mostrarMaisRecentes
@@ -197,7 +209,7 @@ export default function Pesquisa() {
         <Animated.Text
           style={[
             styles.recentText,
-            { color: textColor }
+            { color: textColor },
           ]}
         >
           {item.nome}
@@ -255,7 +267,7 @@ export default function Pesquisa() {
           <Animated.Text
             style={[
               styles.suggestionText,
-              { color: textColor }
+              { color: textColor },
             ]}
           >
             {item.nome}
@@ -294,7 +306,7 @@ export default function Pesquisa() {
         <Animated.Text
           style={[
             styles.suggestionText,
-            { color: textColor }
+            { color: textColor },
           ]}
         >
           {item.nome}

@@ -6,21 +6,25 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: '#FFFFFF',
   },
+
   scrollView: {
     flex: 1,
   },
+
   scrollContent: {
     flexGrow: 1,
     paddingHorizontal: 16,
     paddingTop: 12,
     paddingBottom: 32,
   },
+
   topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
     marginBottom: 14,
   },
+
   backButton: {
     width: 28,
     height: 28,
@@ -31,6 +35,7 @@ export default StyleSheet.create({
     borderRadius: 0,
     padding: 0,
   },
+
   searchContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -46,9 +51,11 @@ export default StyleSheet.create({
     shadowRadius: 0,
     elevation: 0,
   },
+
   searchIcon: {
     marginRight: 8,
   },
+
   searchInput: {
     flex: 1,
     fontSize: 16,
@@ -61,13 +68,16 @@ export default StyleSheet.create({
     outlineStyle: 'none',
     textAlignVertical: 'center',
   },
+
   section: {
     width: '100%',
     marginTop: 8,
   },
+
   recentList: {
     width: '100%',
   },
+
   recentItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -78,12 +88,14 @@ export default StyleSheet.create({
     borderRadius: 8,
     backgroundColor: 'transparent',
   },
+
   itemMainContent: {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
     paddingRight: 12,
   },
+
   iconWrap: {
     position: 'relative',
     width: 18,
@@ -91,6 +103,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   recentText: {
     marginLeft: 10,
     fontSize: 15,
@@ -99,6 +112,7 @@ export default StyleSheet.create({
     flexShrink: 1,
     fontWeight: '400',
   },
+
   removeButton: {
     width: 24,
     height: 24,
@@ -106,18 +120,21 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
+
   seeMoreButton: {
     alignSelf: 'center',
     marginTop: 12,
     paddingVertical: 4,
     paddingHorizontal: 10,
   },
+
   seeMoreText: {
     fontSize: 14,
     color: '#FD7509',
     fontWeight: '600',
     textAlign: 'center',
   },
+
   divider: {
     width: '100%',
     height: 1,
@@ -125,6 +142,7 @@ export default StyleSheet.create({
     marginTop: 18,
     marginBottom: 6,
   },
+
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -132,24 +150,29 @@ export default StyleSheet.create({
     width: '100%',
     marginBottom: 8,
   },
+
   sectionTitle: {
     fontSize: 15,
     color: '#666666',
     fontWeight: '700',
   },
+
   refreshWrap: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
   },
+
   refreshText: {
     fontSize: 12,
     color: '#6B7280',
     fontWeight: '500',
   },
+
   suggestionList: {
     width: '100%',
   },
+
   suggestionItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -159,6 +182,7 @@ export default StyleSheet.create({
     borderRadius: 8,
     backgroundColor: 'transparent',
   },
+
   suggestionText: {
     marginLeft: 10,
     color: '#6A6A6A',
@@ -167,6 +191,7 @@ export default StyleSheet.create({
     flexShrink: 1,
     fontWeight: '400',
   },
+
   userSuggestion: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -176,11 +201,13 @@ export default StyleSheet.create({
     borderRadius: 8,
     backgroundColor: 'transparent',
   },
+
   userSuggestionContent: {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
   },
+
   userAvatar: {
     width: 22,
     height: 22,
@@ -191,6 +218,7 @@ export default StyleSheet.create({
     marginRight: 8,
     position: 'relative',
   },
+
   popularTitle: {
     fontSize: 14,
     color: '#727272',
@@ -198,16 +226,19 @@ export default StyleSheet.create({
     marginTop: 4,
     marginBottom: 12,
   },
+
   popularList: {
     width: '100%',
     gap: 10,
   },
+
   popularItemWrapper: {
     width: '100%',
     position: 'relative',
     overflow: 'hidden',
     borderRadius: 18,
   },
+
   popularItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -219,9 +250,11 @@ export default StyleSheet.create({
     position: 'relative',
     zIndex: 1,
   },
+
   popularIcon: {
     marginRight: 10,
   },
+
   popularText: {
     color: '#4A4A4A',
     fontSize: 14,

@@ -16,10 +16,10 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: '#D8D8D8',
     borderRadius: 14,
-  },
-
-  containerSelected: {
-    borderColor: '#FD7509',
+    shadowColor: 'transparent',
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
   },
 
   icon: {
@@ -38,14 +38,9 @@ export default StyleSheet.create({
     borderColor: 'transparent',
     backgroundColor: 'transparent',
 
-    // Remove o contorno padrão do navegador
     outlineWidth: 0,
     outlineStyle: 'none',
 
     textAlignVertical: 'center',
-  },
-
-  inputSelected: {
-    color: '#FD7509',
   },
 });
