@@ -3,8 +3,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { homeStyle } from "../../styles/homeStyle";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
-
 export default function Home() {
   return (
     <SafeAreaView style={homeStyle.container}>
@@ -20,7 +18,7 @@ export default function Home() {
         <View style={homeStyle.cardPublicacao}>
           <View style={homeStyle.linhaPerfil}>
             <View style={homeStyle.cardPerfil}>
-              <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}>P</Text>
+              <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}></Text>
             </View>
 
             <View style={homeStyle.infoPerfil}>
@@ -54,7 +52,7 @@ export default function Home() {
         <View style={homeStyle.cardPublicacao}>
           <View style={homeStyle.linhaPerfil}>
             <View style={homeStyle.cardPerfil}>
-              <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}>P</Text>
+              <Text style={[homeStyle.cardPerfilText, homeStyle.fonte]}></Text>
             </View>
 
             <View style={homeStyle.infoPerfil}>

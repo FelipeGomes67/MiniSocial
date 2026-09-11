@@ -8,13 +8,8 @@ export const homeStyle = StyleSheet.create({
     },
 
     container: {
-        flex: 1,
-        justifyContent: "center",
-        padding: 20,
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
-
+        paddingHorizontal: 20,
+        paddingVertical: 20,
     },
     title: {
         fontSize: 24,
@@ -102,6 +97,6 @@ export const homeStyle = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         marginTop: 10,
-        marginLeft: 167,
+        marginLeft: 165,
     },
 });
