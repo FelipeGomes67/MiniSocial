@@ -1,6 +1,6 @@
-
 import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { homeStyle } from "../../../styles/homeStyle";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { publiStyle } from "../../../styles/publiStyle"
 import { router } from "expo-router";
@@ -9,21 +9,14 @@ import { router } from "expo-router";
 
 export default function Publicacao() {
 
-
-
-
-
-
-
-
     return (
         <SafeAreaView style={publiStyle.container}>
             <ScrollView contentContainerStyle={publiStyle.scrollContent} showsVerticalScrollIndicator={false}>
                 <View style={publiStyle.header}>
 
-    <TouchableOpacity onPress={() => router.back("/index")} style={publiStyle.buttonBack}>
-          <Ionicons name="chevron-back-outline" size={28} color="#FF6600" />
-        </TouchableOpacity>
+                    <TouchableOpacity onPress={() => router.replace("/(tabs)")} style={publiStyle.buttonBack}>
+                        <Ionicons name="chevron-back-outline" size={28} color="#FF6600" />
+                    </TouchableOpacity>
 
 
 
@@ -37,8 +30,8 @@ export default function Publicacao() {
                         </View>
 
                         <View style={publiStyle.infoPerfil}>
-                            <Text style={[publiStyle.nomePerfil, publiStyle.fonte]}>Pessoa1</Text>
-                            <Text style={[publiStyle.nomePerfilData, publiStyle.fonte]}>01/01/2024</Text>
+                            <Text style={[publiStyle.nomePerfil, homeStyle.fonte]}>Pessoa1</Text>
+                            <Text style={[publiStyle.nomePerfilData, homeStyle.fonte]}>01/01/2024</Text>
                         </View>
                     </View>
 
@@ -74,8 +67,8 @@ export default function Publicacao() {
                         </View>
 
                         <View style={publiStyle.infoPerfil}>
-                            <Text style={[publiStyle.nomePerfil, publiStyle.fonte]}>Pessoa1</Text>
-                            <Text style={[publiStyle.nomePerfilData, publiStyle.fonte]}>01/01/2024</Text>
+                            <Text style={[publiStyle.nomePerfil, homeStyle.fonte]}>Pessoa1</Text>
+                            <Text style={[publiStyle.nomePerfilData, homeStyle.fonte]}>01/01/2024</Text>
                         </View>
                     </View>
 
@@ -102,4 +95,4 @@ export default function Publicacao() {
         </SafeAreaView>
 
     );
-};
+}; 

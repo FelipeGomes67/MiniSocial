@@ -1,19 +1,12 @@
 import { Stack } from "expo-router";
 
-export default function PubliLayout () {
-return(
+export default function PubliLayout() {
+  return (
 
-<Stack 
-screenOptions={{
-headerShown: false,
-
-
-}}
-
-/>
-
-
-)
-
-
+    <Stack
+      screenOptions={{
+        headerShown: false,
+      }}
+    />
+  )
 }
