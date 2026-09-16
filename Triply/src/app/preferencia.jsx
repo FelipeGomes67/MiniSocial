@@ -92,7 +92,7 @@ export default function PreferencesScreen({ onNext }) {
         onPress={() => router.push("/(tabs)")}
         activeOpacity={0.9}
       >
-        <Text style={styles.nextText}>Próximo</Text>
+        <Text style={styles.nextText}>Avançar para o App</Text>
       </TouchableOpacity>
     </View>
   );
