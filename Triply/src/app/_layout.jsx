@@ -4,6 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { ProfileProvider } from "../context/ProfileContext";
 import UsuarioProvider from "../context/UsuarioContext";
+import PrivateRoute from "../routes/PrivateRoute";
 
 export default function Layout() {
     return (
@@ -22,8 +23,22 @@ export default function Layout() {
                         <Stack.Screen name="login" />
                         <Stack.Screen name="cadastro" />
                         <Stack.Screen name="esqueceuSenha" />
-                        <Stack.Screen name="(tabs)" />
-                        <Stack.Screen name="preferencia" />
+
+                        <Stack.Screen name="(tabs)">
+                            {() => (
+                                <PrivateRoute>
+                                    <Stack />
+                                </PrivateRoute>
+                            )}
+                        </Stack.Screen>
+
+                        <Stack.Screen name="preferencia">
+                            {() => (
+                                <PrivateRoute>
+                                    <Stack />
+                                </PrivateRoute>
+                            )}
+                        </Stack.Screen>
                     </Stack>
                 </ProfileProvider>
             </UsuarioProvider>
