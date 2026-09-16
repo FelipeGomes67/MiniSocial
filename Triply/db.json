@@ -64,37 +64,57 @@
       "id": "1",
       "tipo": "comentario",
       "nomeUsuario": "Torolho",
-      "mensagem": "Comentou em sua Publicação.",
-      "horario": "Ontem às 22:21",
-      "imagemTipo": "comentario"
+      "datahora": "2026-09-16T12:54:00.000Z"
     },
     {
       "id": "2",
       "tipo": "seguidor",
-      "nomeUsuario": "Torolho",
-      "mensagem": "Começou a Seguir você!",
-      "horario": "Ontem às 22:21",
-      "imagemTipo": "seguidor"
+      "nomeUsuario": "Diogo",
+      "datahora": "2026-09-16T12:54:00.000Z"
     },
     {
       "id": "3",
       "tipo": "curtida",
-      "nomeUsuario": "Torolho",
-      "mensagem": "Curtiu uma Publicação sua!",
-      "horario": "Ontem às 22:21",
-      "imagemTipo": "curtida"
+      "nomeUsuario": "Fidalgo",
+      "datahora": "2026-09-16T12:54:00.000Z"
     }
   ],
   "pesquisasRecentes": [
-    { "id": "recent-1", "nome": "Maldivas", "icone": "time-outline" },
-    { "id": "recent-2", "nome": "Hawaii", "icone": "time-outline" }
+    {
+      "id": "recent-1",
+      "nome": "Maldivas",
+      "icone": "time-outline"
+    },
+    {
+      "id": "recent-2",
+      "nome": "Hawaii",
+      "icone": "time-outline"
+    }
   ],
   "sugestoes": [
-    { "id": "sug-1", "nome": "Estados Unidos", "icone": "search-outline", "tipo": "destino" },
-    { "id": "sug-4", "nome": "Fidalgo.k2", "icone": "person-outline", "tipo": "usuario" }
+    {
+      "id": "sug-1",
+      "nome": "Estados Unidos",
+      "icone": "search-outline",
+      "tipo": "destino"
+    },
+    {
+      "id": "sug-4",
+      "nome": "Fidalgo.k2",
+      "icone": "person-outline",
+      "tipo": "usuario"
+    }
   ],
   "pesquisasPopulares": [
-    { "id": "pop-1", "nome": "Fidalgo.k2", "icone": "person-outline" },
-    { "id": "pop-2", "nome": "São Paulo", "icone": "time-outline" }
+    {
+      "id": "pop-1",
+      "nome": "Fidalgo.k2",
+      "icone": "person-outline"
+    },
+    {
+      "id": "pop-2",
+      "nome": "São Paulo",
+      "icone": "time-outline"
+    }
   ]
 }
