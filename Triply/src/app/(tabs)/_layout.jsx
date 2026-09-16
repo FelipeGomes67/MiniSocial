@@ -1,11 +1,25 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Tabs } from 'expo-router';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { Tabs, Redirect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useUsuario } from '../../context/UsuarioContext';
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
+  const { usuario, carregando } = useUsuario();
+
+  if (carregando) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#FFFFFF" }}>
+        <ActivityIndicator size="large" color="#FF6600" />
+      </View>
+    );
+  }
+
+  if (!usuario) {
+    return <Redirect href="/boas-vindas" />;
+  }
 
   return (
     <Tabs
@@ -37,72 +51,48 @@ export default function TabsLayout() {
         }}
       />
 
-        <Tabs.Screen
-          name="criar"
-          options={{
-            title: 'Criar',
+      <Tabs.Screen
+        name="criar"
+        options={{
+          title: 'Criar',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? 'add-circle' : 'add-circle-outline'}
+              size={25}
+              color={color}
+            />
+          ),
+        }}
+      />
 
-            tabBarIcon: ({
-              color,
-              focused,
-            }) => (
-              <Ionicons
-                name={
-                  focused
-                    ? 'add-circle'
-                    : 'add-circle-outline'
-                }
-                size={25}
-                color={color}
-              />
-            ),
-          }}
-        />
+      <Tabs.Screen
+        name="notificacoes"
+        options={{
+          title: 'Notificações',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? 'notifications' : 'notifications-outline'}
+              size={24}
+              color={color}
+            />
+          ),
+        }}
+      />
 
-        <Tabs.Screen
-          name="notificacoes"
-          options={{
-            title: 'Notificações',
-
-            tabBarIcon: ({
-              color,
-              focused,
-            }) => (
-              <Ionicons
-                name={
-                  focused
-                    ? 'notifications'
-                    : 'notifications-outline'
-                }
-                size={24}
-                color={color}
-              />
-            ),
-          }}
-        />
-
-        <Tabs.Screen
-          name="perfil"
-          options={{
-            title: 'Perfil',
-
-            tabBarIcon: ({
-              color,
-              focused,
-            }) => (
-              <Ionicons
-                name={
-                  focused
-                    ? 'person'
-                    : 'person-outline'
-                }
-                size={24}
-                color={color}
-              />
-            ),
-          }}
-        />
-      </Tabs>
+      <Tabs.Screen
+        name="perfil"
+        options={{
+          title: 'Perfil',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? 'person' : 'person-outline'}
+              size={24}
+              color={color}
+            />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }
 
@@ -111,17 +101,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-
   tabBar: {
     backgroundColor: '#FFFFFF',
-
     borderTopWidth: 1,
     borderTopColor: '#E5E5E5',
-
     paddingTop: 6,
-
     elevation: 8,
-
     shadowOpacity: 0.08,
     shadowRadius: 8,
     shadowOffset: {
@@ -129,11 +114,9 @@ const styles = StyleSheet.create({
       height: -2,
     },
   },
-
   item: {
     minHeight: 52,
   },
-
   label: {
     fontSize: 10,
     fontWeight: '600',

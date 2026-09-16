@@ -50,10 +50,7 @@ export default function Notificacoes() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
       <View style={{ flex: 1 }}>
         <View style={notificacoesStyle.container}>
-
-          <Text style={notificacoesStyle.title}>
-            Notificações
-          </Text>
+          <Text style={notificacoesStyle.title}>Notificações</Text>
 
           {loading ? (
             <View

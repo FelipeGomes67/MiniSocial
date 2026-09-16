@@ -2,10 +2,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image, TextInput, Alert} from
 import { cadastroStyle } from "../styles/cadastroStyle";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import { Button } from "@expo/ui";
-import Botao from "../components/botao/botao";
-import { botaoStyles } from "../components/botao/botaoStyle";
-import { router } from "expo-router";
+import { router, Redirect } from "expo-router";
 import logo from "../../assets/Logo.png";
 import { SafeAreaView } from "react-native-safe-area-context";
 import api from "../service/service.js";
@@ -14,6 +11,7 @@ export default function Cadastro() {
   const [novoEmail, setNovoEmail] = useState('');
   const [novoNomeCompleto, setNovoNomeCompleto] = useState('');
   const [novaSenha, setNovaSenha] = useState('');
+  const [carregandoCadastro, setCarregandoCadastro] = useState(false);
 
   const cadastrar = async () => {
     if (!novoNomeCompleto || !novoEmail || !novaSenha) {
@@ -51,7 +49,55 @@ export default function Cadastro() {
   };
 
 
+  if (carregando) return null;
 
+  if (usuario) {
+    return <Redirect href="/(tabs)" />;
+  }
+
+  const handleCadastro = async () => {
+    if (!novoNomeCompleto.trim() || !novoEmail.trim() || !novaSenha.trim()) {
+      Alert.alert("Atenção", "Por favor, preencha todos os campos.");
+      return;
+    }
+
+    try {
+      setCarregandoCadastro(true);
+
+      const checarEmail = await api.get(`/usuarios?email=${novoEmail.toLowerCase().trim()}`);
+      if (checarEmail.data.length > 0) {
+        Alert.alert("Erro", "Este e-mail já está em uso.");
+        setCarregandoCadastro(false);
+        return;
+      }
+
+      const usernameGerado = novoEmail.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+
+      const novoUsuario = {
+        nome: novoNomeCompleto.trim(),
+        user: usernameGerado,
+        email: novoEmail.toLowerCase().trim(),
+        senha: novaSenha,
+        seguindo: "0",
+        seguidores: "0",
+        descricacao: "Novo membro da comunidade!",
+        foto: "https://i.pravatar.cc/150?img=60"
+      };
+
+      const resposta = await api.post('/usuarios', novoUsuario);
+
+      if (resposta.status === 201 || resposta.status === 200) {
+        await setUsuario(resposta.data);
+
+        router.replace('/preferencia');
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error);
+      Alert.alert("Erro", "Não foi possível realizar o cadastro.");
+    } finally {
+      setCarregandoCadastro(false);
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -66,20 +112,18 @@ export default function Cadastro() {
 
         <View style={cadastroStyle.formContainer}>
           <View style={cadastroStyle.inputContainer}>
-
             <Text style={cadastroStyle.text}>Nome Completo</Text>
             <TextInput
               style={cadastroStyle.input}
               placeholder="Digite seu Nome Completo"
               placeholderTextColor="#0000005d"
-              autoCapitalize="none"
-              keyboardType="default"
+              autoCapitalize="words"
               value={novoNomeCompleto}
               onChangeText={setNovoNomeCompleto}
             />
           </View>
-          <View style={cadastroStyle.inputContainer}>
 
+          <View style={cadastroStyle.inputContainer}>
             <Text style={cadastroStyle.text}>E-mail</Text>
             <TextInput
               style={cadastroStyle.input}
@@ -91,22 +135,18 @@ export default function Cadastro() {
               onChangeText={setNovoEmail}
             />
           </View>
-          <View style={cadastroStyle.inputContainer}>
 
+          <View style={cadastroStyle.inputContainer}>
             <Text style={cadastroStyle.text}>Senha</Text>
             <TextInput
               style={cadastroStyle.input}
               placeholder="Digite sua senha"
               secureTextEntry={true}
               placeholderTextColor="#0000005d"
-              autoComplete="current-password"
               value={novaSenha}
               onChangeText={setNovaSenha}
             />
           </View>
-
-
-
         </View>
 
         <TouchableOpacity style={cadastroStyle.button} onPress={cadastrar}>
@@ -116,11 +156,12 @@ export default function Cadastro() {
         <View style={cadastroStyle.footer}>
         <Text style={cadastroStyle.signupText}>
           Já tem uma conta?{""}
+        </Text>
           <Text style={cadastroStyle.signupLink} onPress={() => router.push("/login")}>
             Entrar
           </Text>
-        </Text>
         </View>
+
       </View>
     </SafeAreaView>
   );

@@ -3,6 +3,7 @@
     {
       "id": "1",
       "nome": "Torolho",
+      "user": "torolhinho",
       "email": "torolho@gmail.com",
       "senha": "123",
       "foto": "https://i.pravatar.cc/150?img=12",
@@ -13,16 +14,35 @@
     {
       "id": "2",
       "nome": "Fidalgo.k2",
+      "user": "torolhinho.k2",
       "email": "fidalgo@gmail.com",
       "senha": "123",
+      "seguindo": "1",
+      "seguidores": "1",
+      "descricacao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
       "foto": "https://i.pravatar.cc/150?img=33"
     },
     {
       "id": "3",
       "nome": "Pessoa1",
+      "user": "torolhinho",
       "email": "pessoa1@gmail.com",
       "senha": "123",
+      "seguindo": "1",
+      "seguidores": "1",
+      "descricacao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
       "foto": "https://i.pravatar.cc/150?img=5"
+    },
+    {
+      "nome": "Felipe",
+      "user": "felipegg",
+      "email": "felipegg@gmail.com",
+      "senha": "123",
+      "seguindo": "0",
+      "seguidores": "0",
+      "descricacao": "Novo membro da comunidade!",
+      "foto": "https://i.pravatar.cc/150?img=60",
+      "id": "vTT4GRUGZFk"
     }
   ],
   "publicacoes": [
@@ -154,25 +174,31 @@
       "id": "1",
       "tipo": "comentario",
       "nomeUsuario": "Torolho",
-      "mensagem": "Comentou em sua Publicação.",
-      "horario": "Ontem às 22:21",
-      "imagemTipo": "comentario"
+      "datahora": "2026-09-16T12:54:00.000Z"
     },
     {
       "id": "2",
       "tipo": "seguidor",
-      "nomeUsuario": "Torolho",
-      "mensagem": "Começou a Seguir você!",
-      "horario": "Ontem às 22:21",
-      "imagemTipo": "seguidor"
+      "nomeUsuario": "Diogo",
+      "datahora": "2026-09-16T12:54:00.000Z"
+    },
+    {
+      "id": "2",
+      "tipo": "seguidor",
+      "nomeUsuario": "TT67",
+      "datahora": "2026-09-16T12:54:00.000Z"
+    },
+    {
+      "id": "2",
+      "tipo": "seguidor",
+      "nomeUsuario": "Fidalgo6767",
+      "datahora": "2026-09-16T12:54:00.000Z"
     },
     {
       "id": "3",
       "tipo": "curtida",
-      "nomeUsuario": "Torolho",
-      "mensagem": "Curtiu uma Publicação sua!",
-      "horario": "Ontem às 22:21",
-      "imagemTipo": "curtida"
+      "nomeUsuario": "Fidalgo",
+      "datahora": "2026-09-16T12:54:00.000Z"
     }
   ],
   "pesquisasRecentes": [

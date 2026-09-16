@@ -4,6 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { ProfileProvider } from "../context/ProfileContext";
 import UsuarioProvider from "../context/UsuarioContext";
+import PrivateRoute from "../routes/PrivateRoute";
 
 export default function Layout() {
   return (

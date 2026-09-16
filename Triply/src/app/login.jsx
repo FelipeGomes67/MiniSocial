@@ -16,11 +16,21 @@ import Botao from "../components/botao/botao.jsx";
 import BotaoGoogle from "../components/botaoGoogle/botaogoogle.jsx";
 import api from "../service/service.js";
 import { useUsuario } from "../context/UsuarioContext";
+import { Redirect } from "expo-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const { setUsuario } = useUsuario();
+
+  const { usuario, carregando } = useUsuario();
+
+  if (carregando) return null;
+
+  if (usuario) {
+    return <Redirect href="/(tabs)" />;
+  }
+
 
   const login = async () => {
     if (!email || !senha) {
