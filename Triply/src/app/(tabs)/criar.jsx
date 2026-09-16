@@ -166,7 +166,7 @@ export default function Criar() {
       )}
 
       <View style={criarStyle.containerBotaoPublicar}>
-        <Botao botao="Publicar"></Botao>
+        <Botao botao="Publicar"/>
       </View>
 
       {/* Menu de opções: Tirar foto ou Escolher da galeria */}

@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Image, TextInput, Alert } from "react-native"; // 1. Importado Alert aqui
+import { Text, View, TouchableOpacity, Image, TextInput, Alert, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { loginStyle } from "../styles/loginStyle.js";
 import { router } from "expo-router";
@@ -8,39 +8,47 @@ import { useState } from "react";
 import Botao from "../components/botao/botao.jsx";
 import BotaoGoogle from "../components/botaoGoogle/botaogoogle.jsx";
 import api from "../service/service.js";
+import { useUsuario } from "../context/UsuarioContext";
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const { setUsuario } = useUsuario();
 
-  // const login = async () => {
-  //   if (!email || !senha) {
-  //     Alert.alert("Aviso", "Preencha todos os campos!");
-  //     return;
-  //   }
+  const login = async () => {
+    if (!email || !senha) {
+      Alert.alert("Aviso", "Preencha todos os campos!");
+      return;
+    }
 
-  //   const emailLimpo = email.trim().toLowerCase();
+    const emailLimpo = email.trim().toLowerCase();
 
-  //   try {
-  //       const response = await api.get(`/usuarios?email=${emailLimpo}`);
+    try {
+      const response = await api.get('/usuarios');
 
-  //     if (response.data.length > 0) {
-  //       const usuarioEncontrado = response.data[0];
+      if (response.data && Array.isArray(response.data)) {
+        const usuarioEncontrado = response.data.find(
+          (u) => u.email && u.email.trim().toLowerCase() === emailLimpo
+        );
 
-  //       if (usuarioEncontrado.senha === senha) {
-  //         console.log("Login realizado com sucesso:", usuarioEncontrado);
-  //         router.replace("/(tabs)");
-  //       } else {
-  //         Alert.alert("Erro", "Senha incorreta.");
-  //       }
-  //     } else {
-  //       Alert.alert("Erro", "E-mail não encontrado.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Erro na requisição:", error);
-  //     Alert.alert("Erro", "Não foi possível conectar ao servidor.");
-  //   }
-  // };
+        if (usuarioEncontrado) {
+          if (usuarioEncontrado.senha === senha) {
+            console.log("Login realizado com sucesso:", usuarioEncontrado);
+            await setUsuario(usuarioEncontrado);
+            router.replace("/preferencia");
+          } else {
+            Alert.alert("Erro", "Senha incorreta.");
+          }
+        } else {
+          Alert.alert("Erro", "E-mail não encontrado.");
+        }
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      Alert.alert("Erro de Conexão", "Não foi possível conectar ao servidor. Verifique a conexão com o IP e o json-server.");
+    } finally {
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
@@ -84,7 +92,7 @@ export default function Login() {
             <Text style={[loginStyle.esqueceuSenha, loginStyle.fonte]}>Esqueceu a senha?</Text>
           </TouchableOpacity>
 
-          <Botao botao="Entrar" onPress={() => router.push("/preferencia")} />
+            <Botao botao="Entrar" onPress={login} />
 
           <View style={loginStyle.dividerContainer}>
             <View style={loginStyle.line} />
@@ -92,7 +100,7 @@ export default function Login() {
             <View style={loginStyle.line} />
           </View>
 
-          <BotaoGoogle onPress={() => { }} />
+          <BotaoGoogle onPress={() => {}} />
 
           <Text style={[loginStyle.signupText, loginStyle.fonte]}>
             Não tem uma conta?{" "}

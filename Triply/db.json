@@ -3,21 +3,21 @@
     {
       "id": "1",
       "nome": "Torolho",
-      "email": "torolho@email.com",
+      "email": "torolho@gmail.com",
       "senha": "123",
       "foto": "https://i.pravatar.cc/150?img=12"
     },
     {
       "id": "2",
       "nome": "Fidalgo.k2",
-      "email": "fidalgo@email.com",
+      "email": "fidalgo@gmail.com",
       "senha": "123",
       "foto": "https://i.pravatar.cc/150?img=33"
     },
     {
       "id": "3",
       "nome": "Pessoa1",
-      "email": "pessoa1@email.com",
+      "email": "pessoa1@gmail.com",
       "senha": "123",
       "foto": "https://i.pravatar.cc/150?img=5"
     }

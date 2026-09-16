@@ -9,14 +9,14 @@ import { router } from "expo-router";
 
 
 export default function Publicacao() {
-    
+
     return (
         <SafeAreaView style={publiStyle.container}>
             <ScrollView contentContainerStyle={publiStyle.scrollContent} showsVerticalScrollIndicator={false}>
                 <View style={publiStyle.header}>
 
-       <TouchableOpacity onPress={() => router.back("/index")} style={publiStyle.buttonBack}>
-          
+                    <TouchableOpacity onPress={() => router.back("/index")} style={publiStyle.buttonBack}>
+
 
                         <Ionicons name="chevron-back-outline" size={28} color="#FF6600" />
                     </TouchableOpacity>
@@ -24,9 +24,9 @@ export default function Publicacao() {
 
 
                     <Text style={[publiStyle.title, publiStyle.fonte]}>Publicação</Text>
-                        <Ionicons name="share-social" size={28} color="#000000" />
+                    <Ionicons name="share-social" size={28} color="#000000" />
                 </View>
-                
+
                 <View style={publiStyle.cardPublicacao}>
                     <View style={publiStyle.linhaPerfil}>
                         <View style={publiStyle.cardPerfil}>
