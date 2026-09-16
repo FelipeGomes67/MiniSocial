@@ -1,13 +1,22 @@
 import axios from "axios";
 
-const apiPort = 3000
-
-const localApi = `http://192.168.137.1:${apiPort}`
-
+const API_HOST = "172.16.36.36";
+const API_PORT = 3000;
 
 const api = axios.create({
-    baseURL: localApi
-})
+  baseURL: `http://${API_HOST}:${API_PORT}`,
+  timeout: 10000,
+});
 
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (!error.response) {
+      console.error("Erro de conexão com a API:", error);
+    }
 
-export default api
+    return Promise.reject(error);
+  }
+);
+
+export default api;

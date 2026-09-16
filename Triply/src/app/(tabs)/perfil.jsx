@@ -1,20 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 
-import {
-  AccessibilityInfo,
-  Alert,
-  AppState,
-  Easing,
-  FlatList,
-  Keyboard,
-  KeyboardAvoidingView,
-  Modal,
-  Pressable,
-  ActivityIndicator,
-  Animated,
-  Image,
-  ScrollView,
-  StyleSheet,
+import { AccessibilityInfo,Alert,AppState,Easing,FlatList,Keyboard,KeyboardAvoidingView,Modal,Pressable,ActivityIndicator,Animated,Image,ScrollView,StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -22,8 +8,6 @@ import {
   useWindowDimensions,
   Platform,
 } from 'react-native';
-
-import * as ImagePicker from 'expo-image-picker';
 
 import {
   SafeAreaView,
@@ -71,14 +55,9 @@ export default function ProfileScreen({
   const [activeTab, setActiveTab] = useState('posts');
   const [peopleListMode, setPeopleListMode] = useState(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [profilePhotoOpen, setProfilePhotoOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   const { width } = useWindowDimensions();
-
-  /* =========================================================
-     ENCERRAR SESSÃO
-  ========================================================= */
 
   const endSession = async (switchAccount) => {
     const logout = onLogout || profileContext.logout;
@@ -124,10 +103,6 @@ export default function ProfileScreen({
     }
   };
 
-  /* =========================================================
-     PUBLICAÇÕES VISÍVEIS
-  ========================================================= */
-
   const visiblePosts = useMemo(() => {
     if (!profile) return [];
 
@@ -142,10 +117,6 @@ export default function ProfileScreen({
     );
   }, [activeTab, posts, profile]);
 
-  /* =========================================================
-     SEGUIDORES
-  ========================================================= */
-
   const followerUsers = useMemo(
     () =>
       (profile?.followers ?? [])
@@ -156,10 +127,6 @@ export default function ProfileScreen({
     [profile, users]
   );
 
-  /* =========================================================
-     SEGUINDO
-  ========================================================= */
-
   const followingUsers = useMemo(
     () =>
       (profile?.following ?? [])
@@ -169,10 +136,6 @@ export default function ProfileScreen({
         .filter(Boolean),
     [profile, users]
   );
-
-  /* =========================================================
-     LOADING
-  ========================================================= */
 
   if (loading) {
     return (
@@ -185,10 +148,6 @@ export default function ProfileScreen({
     );
   }
 
-  /* =========================================================
-     ERRO
-  ========================================================= */
-
   if (error || !profile) {
     return (
       <View style={styles.loadingWrap}>
@@ -199,10 +158,6 @@ export default function ProfileScreen({
       </View>
     );
   }
-
-  /* =========================================================
-     EDITAR PERFIL
-  ========================================================= */
 
   if (mode === 'edit' || isEditing) {
     return (
@@ -216,10 +171,6 @@ export default function ProfileScreen({
       />
     );
   }
-
-  /* =========================================================
-     GRADE RESPONSIVA
-  ========================================================= */
 
   const horizontalPadding = 24;
   const gap = 8;
@@ -237,10 +188,6 @@ export default function ProfileScreen({
     peopleListMode === 'followers'
       ? followerUsers
       : followingUsers;
-
-  /* =========================================================
-     STATUS DE RELACIONAMENTO
-  ========================================================= */
 
   const getFollowStatus = (person) => {
     const isFollowing = (
@@ -273,10 +220,6 @@ export default function ProfileScreen({
     return 'Seguir';
   };
 
-  /* =========================================================
-     ESTILO DO BOTÃO DE SEGUIR
-  ========================================================= */
-
   const getFollowButtonStyle = (person) => {
     const status = getFollowStatus(person);
 
@@ -306,10 +249,6 @@ export default function ProfileScreen({
       styles.followActionPrimary,
     ];
   };
-
-  /* =========================================================
-     TEXTO DO BOTÃO
-  ========================================================= */
 
   const getFollowButtonTextStyle = (person) => {
     const status = getFollowStatus(person);
@@ -348,9 +287,6 @@ export default function ProfileScreen({
         showsVerticalScrollIndicator={false}
         bounces={false}
       >
-        {/* =====================================================
-            TOP BAR
-        ===================================================== */}
 
         <View style={styles.topbar}>
           <View style={styles.logoWrap}>
@@ -390,26 +326,16 @@ export default function ProfileScreen({
           </TouchableOpacity>
         </View>
 
-        {/* =====================================================
-            FOTO DE PERFIL
-        ===================================================== */}
+        {/* FOTO DE PERFIL */}
 
         <View style={styles.avatarWrap}>
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={() =>
-              setProfilePhotoOpen(true)
-            }
-            accessibilityRole="button"
-            accessibilityLabel="Visualizar foto de perfil"
-            style={styles.avatarTouchable}
-          >
-            <Image
-              source={{ uri: profile.avatar }}
-              style={styles.avatar}
-              resizeMode="cover"
-            />
-          </TouchableOpacity>
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>
+              {(profile.name || '?')
+                .slice(0, 1)
+                .toUpperCase()}
+            </Text>
+          </View>
 
           <TouchableOpacity
             style={styles.penButton}
@@ -434,9 +360,7 @@ export default function ProfileScreen({
           @{profile.username}
         </Text>
 
-        {/* =====================================================
-            ESTATÍSTICAS
-        ===================================================== */}
+        {/* ESTATÍSTICAS */}
 
         <View style={styles.stats}>
           {[
@@ -490,17 +414,13 @@ export default function ProfileScreen({
           ))}
         </View>
 
-        {/* =====================================================
-            BIO
-        ===================================================== */}
+        {/* BIO */}
 
         <Text style={styles.bio}>
           {profile.bio}
         </Text>
 
-        {/* =====================================================
-            POSTS / FAVORITOS
-        ===================================================== */}
+        {/* POSTS / FAVORITOS */}
 
         <View style={styles.selectorRow}>
           <TouchableOpacity
@@ -552,9 +472,7 @@ export default function ProfileScreen({
           </TouchableOpacity>
         </View>
 
-        {/* =====================================================
-            GRADE DE POSTS
-        ===================================================== */}
+        {/* GRADE DE POSTS */}
 
         <View style={styles.grid}>
           {visiblePosts.length === 0 ? (
@@ -628,21 +546,7 @@ export default function ProfileScreen({
         </View>
       </ScrollView>
 
-      {/* =======================================================
-          FOTO DE PERFIL EM DETALHES
-      ======================================================= */}
-
-      <ProfilePhotoModal
-        uri={profile.avatar}
-        visible={profilePhotoOpen}
-        onClose={() =>
-          setProfilePhotoOpen(false)
-        }
-      />
-
-      {/* =======================================================
-          SEGUIDORES / SEGUINDO
-      ======================================================= */}
+      {/* SEGUIDORES / SEGUINDO */}
 
       {peopleListMode && (
         <PeoplePanel
@@ -667,9 +571,7 @@ export default function ProfileScreen({
         />
       )}
 
-      {/* =======================================================
-          CONFIGURAÇÕES
-      ======================================================= */}
+      {/* CONFIGURAÇÕES */}
 
       {settingsOpen && (
         <AccountSettings
@@ -683,136 +585,6 @@ export default function ProfileScreen({
         />
       )}
     </SafeAreaView>
-  );
-}
-
-/* =========================================================
-   FOTO DE PERFIL EM DETALHES
-========================================================= */
-
-function ProfilePhotoModal({
-  uri,
-  visible,
-  onClose,
-}) {
-  const { width, height } =
-    useWindowDimensions();
-
-  const progress =
-    React.useRef(
-      new Animated.Value(0)
-    ).current;
-
-  const [reduceMotion, setReduceMotion] =
-    useState(false);
-
-  useEffect(() => {
-    let active = true;
-
-    AccessibilityInfo
-      .isReduceMotionEnabled()
-      .then((value) => {
-        if (active) {
-          setReduceMotion(value);
-        }
-      })
-      .catch(() => { });
-
-    return () => {
-      active = false;
-      progress.stopAnimation();
-    };
-  }, [progress]);
-
-  useEffect(() => {
-    if (!visible) return;
-
-    progress.setValue(0);
-
-    Animated.timing(progress, {
-      toValue: 1,
-      duration: reduceMotion ? 0 : 220,
-      easing: Easing.out(
-        Easing.cubic
-      ),
-      useNativeDriver: true,
-    }).start();
-  }, [
-    visible,
-    reduceMotion,
-    progress,
-  ]);
-
-  if (!visible) return null;
-
-  const imageSize = Math.min(
-    width - 40,
-    height - 180
-  );
-
-  return (
-    <Modal
-      transparent
-      visible={visible}
-      animationType="none"
-      statusBarTranslucent
-      presentationStyle="overFullScreen"
-      onRequestClose={onClose}
-    >
-      <View style={styles.photoModal}>
-        <Pressable
-          style={StyleSheet.absoluteFillObject}
-          onPress={onClose}
-          accessibilityRole="button"
-          accessibilityLabel="Fechar foto"
-        />
-
-        <TouchableOpacity
-          style={styles.photoCloseButton}
-          onPress={onClose}
-          activeOpacity={0.8}
-          accessibilityRole="button"
-          accessibilityLabel="Fechar visualização da foto"
-        >
-          <Text style={styles.photoCloseText}>
-            ×
-          </Text>
-        </TouchableOpacity>
-
-        <Animated.View
-          style={[
-            styles.photoViewer,
-            {
-              opacity: progress,
-              transform: [
-                {
-                  scale:
-                    progress.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [
-                        0.88,
-                        1,
-                      ],
-                    }),
-                },
-              ],
-            },
-          ]}
-        >
-          <Image
-            source={{ uri }}
-            style={[
-              styles.photoDetail,
-              {
-                width: imageSize,
-                height: imageSize,
-              },
-            ]}
-            resizeMode="contain"
-          />
-        </Animated.View>
-      </View>
-    </Modal>
   );
 }
 
@@ -836,53 +608,8 @@ function EditProfile({
     profile.bio
   );
 
-  const [avatar, setAvatar] = useState(
-    profile.avatar
-  );
-
   const [saving, setSaving] =
     useState(false);
-
-  const pickAvatar = async () => {
-    try {
-      const permission =
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-      if (!permission.granted) {
-        alert(
-          'Precisamos de permissão para acessar suas fotos.'
-        );
-        return;
-      }
-
-      const result =
-        await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ['images'],
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-        });
-
-      if (
-        !result.canceled &&
-        result.assets?.length > 0
-      ) {
-        const selectedImage =
-          result.assets[0].uri;
-
-        setAvatar(selectedImage);
-      }
-    } catch (error) {
-      console.error(
-        'Erro ao selecionar foto:',
-        error
-      );
-
-      alert(
-        'Não foi possível selecionar a imagem.'
-      );
-    }
-  };
 
   const save = async () => {
     try {
@@ -892,7 +619,6 @@ function EditProfile({
         name,
         username,
         bio,
-        avatar,
       });
 
       onBack?.();
@@ -957,32 +683,23 @@ function EditProfile({
           <View
             style={styles.avatarWrapEdit}
           >
-            <Image
-              source={{ uri: avatar }}
+            <View
               style={styles.avatarLarge}
-              resizeMode="cover"
-            />
-
-            <TouchableOpacity
-              style={styles.dotButton}
-              activeOpacity={0.9}
-              onPress={pickAvatar}
-              accessibilityRole="button"
-              accessibilityLabel="Alterar foto"
             >
-              <Image
-                source={PenIcon}
-                style={styles.dotIcon}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
+              <Text
+                style={styles.avatarLargeText}
+              >
+                {(name || '?')
+                  .slice(0, 1)
+                  .toUpperCase()}
+              </Text>
+            </View>
           </View>
 
           <Text
             style={styles.changePhotoText}
           >
-            Toque no lápis para alterar
-            sua foto
+            Foto de perfil não utilizada
           </Text>
 
           <Text style={styles.fieldLabel}>
@@ -1812,7 +1529,7 @@ function AccountSettings({
               title="Sair da conta"
               danger
               onPress={() => {
-                router.replace("/boas-vindas")
+                router.replace("/boas-vindas");
               }}
             />
           </>
@@ -2153,30 +1870,18 @@ function PeoplePanel({
               <View
                 style={ui.personMeta}
               >
-                {person.avatar ? (
-                  <Image
-                    source={{
-                      uri: person.avatar,
-                    }}
-                    style={ui.avatar}
-                  />
-                ) : (
-                  <View
-                    style={[
-                      ui.avatar,
-                      ui.avatarFallback,
-                    ]}
-                  >
-                    <Text
-                      style={ui.brand}
-                    >
-                      {(
-                        person.name ||
-                        '?'
-                      ).slice(0, 1)}
-                    </Text>
-                  </View>
-                )}
+                <View
+                  style={[
+                    ui.avatar,
+                    ui.avatarFallback,
+                  ]}
+                >
+                  <Text style={ui.avatarFallbackText}>
+                    {(person.name || '?')
+                      .slice(0, 1)
+                      .toUpperCase()}
+                  </Text>
+                </View>
 
                 <View
                   style={ui.personText}
@@ -2295,12 +2000,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
 
-  /*
-   * Espaço inferior para a navegação principal.
-   * A própria Tabs também ocupa o espaço dela,
-   * mas este espaço evita que o último conteúdo
-   * fique colado na navegação.
-   */
   screenContent: {
     paddingBottom: 110,
   },
@@ -2318,10 +2017,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
-
-  /* =====================================================
-     TOPBAR
-  ===================================================== */
 
   topbar: {
     flexDirection: 'row',
@@ -2375,21 +2070,6 @@ const styles = StyleSheet.create({
     height: 22,
   },
 
-  profileTitle: {
-    textAlign: 'center',
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#111111',
-    fontFamily: baseFont,
-    letterSpacing: -0.8,
-    marginTop: 8,
-    marginBottom: 2,
-  },
-
-  /* =====================================================
-     AVATAR
-  ===================================================== */
-
   avatarWrap: {
     alignSelf: 'center',
     width: 156,
@@ -2411,7 +2091,16 @@ const styles = StyleSheet.create({
     width: 136,
     height: 136,
     borderRadius: 68,
-    backgroundColor: '#0F0F0F',
+    backgroundColor: '#F4E9DF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  avatarText: {
+    fontSize: 48,
+    fontWeight: '700',
+    color: '#FD7509',
+    fontFamily: baseFont,
   },
 
   penButton: {
@@ -2433,10 +2122,6 @@ const styles = StyleSheet.create({
     height: 18,
   },
 
-  /* =====================================================
-     NOME
-  ===================================================== */
-
   name: {
     textAlign: 'center',
     fontSize: 22,
@@ -2454,10 +2139,6 @@ const styles = StyleSheet.create({
     fontFamily: baseFont,
     marginTop: 2,
   },
-
-  /* =====================================================
-     ESTATÍSTICAS
-  ===================================================== */
 
   stats: {
     flexDirection: 'row',
@@ -2497,10 +2178,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  /* =====================================================
-     BIO
-  ===================================================== */
-
   bio: {
     textAlign: 'center',
     fontSize: 13,
@@ -2511,10 +2188,6 @@ const styles = StyleSheet.create({
     fontFamily: baseFont,
     paddingHorizontal: 26,
   },
-
-  /* =====================================================
-     POSTS / FAVORITOS
-  ===================================================== */
 
   selectorRow: {
     flexDirection: 'row',
@@ -2556,10 +2229,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     backgroundColor: '#FD7509',
   },
-
-  /* =====================================================
-     GRID
-  ===================================================== */
 
   grid: {
     flexDirection: 'row',
@@ -2609,10 +2278,6 @@ const styles = StyleSheet.create({
     tintColor: '#FFFFFF',
   },
 
-  /* =====================================================
-     EMPTY
-  ===================================================== */
-
   emptyState: {
     width: '100%',
     paddingVertical: 28,
@@ -2625,54 +2290,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontFamily: baseFont,
   },
-
-  /* =====================================================
-     FOTO GRANDE
-  ===================================================== */
-
-  photoModal: {
-    flex: 1,
-    backgroundColor:
-      'rgba(0, 0, 0, 0.96)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  photoViewer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  photoDetail: {
-    borderRadius: 12,
-  },
-
-  photoCloseButton: {
-    position: 'absolute',
-    top: Platform.OS === 'android'
-      ? 34
-      : 54,
-    right: 18,
-    width: 46,
-    height: 46,
-    borderRadius: 23,
-    backgroundColor:
-      'rgba(255,255,255,0.12)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10,
-  },
-
-  photoCloseText: {
-    color: '#FFFFFF',
-    fontSize: 34,
-    lineHeight: 38,
-    fontWeight: '300',
-  },
-
-  /* =====================================================
-     EDITAR PERFIL
-  ===================================================== */
 
   editKeyboard: {
     flex: 1,
@@ -2715,33 +2332,22 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
   },
 
   avatarLarge: {
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: '#0F0F0F',
-  },
-
-  dotButton: {
-    position: 'absolute',
-    right: 6,
-    bottom: 8,
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    backgroundColor: '#FD7509',
-    borderWidth: 3,
-    borderColor: '#FFFFFF',
+    backgroundColor: '#F4E9DF',
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  dotIcon: {
-    width: 15,
-    height: 15,
+  avatarLargeText: {
+    fontSize: 42,
+    fontWeight: '700',
+    color: '#FD7509',
+    fontFamily: baseFont,
   },
 
   changePhotoText: {
@@ -2806,6 +2412,60 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     fontFamily: baseFont,
+  },
+
+  personName: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#20242A',
+  },
+
+  personUsername: {
+    fontSize: 12,
+    color: '#737982',
+    marginTop: 2,
+  },
+
+  followAction: {
+    borderRadius: 999,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    minWidth: 104,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  followActionPrimary: {
+    backgroundColor: '#FD7509',
+  },
+
+  followActionReturn: {
+    backgroundColor: '#FFE4CC',
+  },
+
+  followActionMutual: {
+    backgroundColor: '#E7F7EA',
+  },
+
+  followActionActive: {
+    backgroundColor: '#F0F0F0',
+  },
+
+  followActionText: {
+    fontWeight: '700',
+    fontSize: 12,
+  },
+
+  followActionTextPrimary: {
+    color: '#FFFFFF',
+  },
+
+  followActionTextReturn: {
+    color: '#B75A00',
+  },
+
+  followActionTextActive: {
+    color: '#111111',
   },
 });
 
@@ -3194,6 +2854,12 @@ const ui = StyleSheet.create({
     justifyContent: 'center',
   },
 
+  avatarFallbackText: {
+    color: '#FD7509',
+    fontSize: 18,
+    fontWeight: '700',
+  },
+
   mutual: {
     color: '#377546',
     fontSize: 11,
@@ -3210,47 +2876,5 @@ const ui = StyleSheet.create({
   followText: {
     textAlign: 'center',
     flexShrink: 1,
-  },
-
-  followAction: {
-    borderRadius: 999,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    minWidth: 104,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  followActionPrimary: {
-    backgroundColor: '#FD7509',
-  },
-
-  followActionReturn: {
-    backgroundColor: '#FFE4CC',
-  },
-
-  followActionMutual: {
-    backgroundColor: '#E7F7EA',
-  },
-
-  followActionActive: {
-    backgroundColor: '#F0F0F0',
-  },
-
-  followActionText: {
-    fontWeight: '700',
-    fontSize: 12,
-  },
-
-  followActionTextPrimary: {
-    color: '#FFFFFF',
-  },
-
-  followActionTextReturn: {
-    color: '#B75A00',
-  },
-
-  followActionTextActive: {
-    color: '#111111',
   },
 });

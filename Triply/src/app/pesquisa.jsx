@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,83 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { router, useNavigation } from 'expo-router';
 
 import styles from '../styles/PesquisaStyle';
-
-const pesquisasRecentesInicio = [
-  { id: 'recent-1', nome: 'Maldivas', icone: 'time-outline' },
-  { id: 'recent-2', nome: 'Hawaii', icone: 'time-outline' },
-  { id: 'recent-3', nome: 'Dubai', icone: 'time-outline' },
-  { id: 'recent-4', nome: 'São Paulo', icone: 'time-outline' },
-];
-
-const pesquisasRecentesExtras = [
-  { id: 'recent-5', nome: 'Bali', icone: 'time-outline' },
-  { id: 'recent-6', nome: 'Paris', icone: 'time-outline' },
-];
-
-const sugestoesInicio = [
-  {
-    id: 'sug-1',
-    nome: 'Estados Unidos',
-    icone: 'search-outline',
-    tipo: 'destino',
-  },
-  {
-    id: 'sug-2',
-    nome: 'Estados Unidos',
-    icone: 'search-outline',
-    tipo: 'destino',
-  },
-  {
-    id: 'sug-3',
-    nome: 'Estados Unidos',
-    icone: 'search-outline',
-    tipo: 'destino',
-  },
-  {
-    id: 'sug-4',
-    nome: 'Fidalgo.k2',
-    icone: 'person-outline',
-    tipo: 'usuario',
-  },
-];
-
-const sugestoesExtras = [
-  {
-    id: 'sug-5',
-    nome: 'Japão',
-    icone: 'search-outline',
-    tipo: 'destino',
-  },
-  {
-    id: 'sug-6',
-    nome: 'Tailândia',
-    icone: 'search-outline',
-    tipo: 'destino',
-  },
-];
-
-const pesquisasPopulares = [
-  {
-    id: 'pop-1',
-    nome: 'Fidalgo.k2',
-    icone: 'person-outline',
-  },
-  {
-    id: 'pop-2',
-    nome: 'São Paulo',
-    icone: 'time-outline',
-  },
-  {
-    id: 'pop-3',
-    nome: 'São Paulo',
-    icone: 'time-outline',
-  },
-  {
-    id: 'pop-4',
-    nome: 'São Paulo',
-    icone: 'time-outline',
-  },
-];
+import api from '../service/service.js';
 
 const popularCardColors = [
   'rgba(243, 165, 92, 0.74)',
@@ -103,8 +27,34 @@ export default function Pesquisa() {
   const [pesquisa, setPesquisa] = useState('');
   const [mostrarMaisRecentes, setMostrarMaisRecentes] = useState(false);
   const [mostrarMaisSugestoes, setMostrarMaisSugestoes] = useState(false);
-  const [recentes, setRecentes] = useState(pesquisasRecentesInicio);
+  const [recentes, setRecentes] = useState([]);
+  const [sugestoes, setSugestoes] = useState([]);
+  const [populares, setPopulares] = useState([]);
+  const [loading, setLoading] = useState(true);
   const pressAnimations = useRef({});
+
+  useEffect(() => {
+    carregarDados();
+  }, []);
+
+  const carregarDados = async () => {
+    try {
+      setLoading(true);
+      const [recentesRes, sugestoesRes, popularesRes] = await Promise.all([
+        api.get('/pesquisasRecentes'),
+        api.get('/sugestoes'),
+        api.get('/pesquisasPopulares'),
+      ]);
+
+      setRecentes(recentesRes.data);
+      setSugestoes(sugestoesRes.data);
+      setPopulares(popularesRes.data);
+    } catch (err) {
+      console.error('Erro ao carregar dados de pesquisa:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleGoBack = () => {
     if (navigation?.canGoBack?.()) {
@@ -115,12 +65,12 @@ export default function Pesquisa() {
   };
 
   const listaRecentes = mostrarMaisRecentes
-    ? [...recentes, ...pesquisasRecentesExtras]
-    : recentes;
+    ? recentes
+    : recentes.slice(0, 4);
 
   const listaSugestoes = mostrarMaisSugestoes
-    ? [...sugestoesInicio, ...sugestoesExtras]
-    : sugestoesInicio;
+    ? sugestoes
+    : sugestoes.slice(0, 4);
 
   const removerRecente = (id) => {
     setRecentes((atual) =>
@@ -236,54 +186,16 @@ export default function Pesquisa() {
       outputRange: [0, 1],
     });
 
-    if (item.tipo === 'usuario') {
-      return (
-        <View style={styles.userSuggestionContent}>
-          <View style={styles.iconWrap}>
-            <Animated.View
-              style={{ opacity: iconBaseOpacity }}
-            >
-              <Ionicons
-                name="person-outline"
-                size={16}
-                color="#7A7A7A"
-              />
-            </Animated.View>
-
-            <Animated.View
-              style={{
-                position: 'absolute',
-                opacity: iconPressedOpacity,
-              }}
-            >
-              <Ionicons
-                name="person-outline"
-                size={16}
-                color="#FD7509"
-              />
-            </Animated.View>
-          </View>
-
-          <Animated.Text
-            style={[
-              styles.suggestionText,
-              { color: textColor },
-            ]}
-          >
-            {item.nome}
-          </Animated.Text>
-        </View>
-      );
-    }
+    const iconName = item.tipo === 'usuario' ? 'person-outline' : item.icone;
 
     return (
-      <View style={styles.itemMainContent}>
+      <View style={item.tipo === 'usuario' ? styles.userSuggestionContent : styles.itemMainContent}>
         <View style={styles.iconWrap}>
           <Animated.View
             style={{ opacity: iconBaseOpacity }}
           >
             <Ionicons
-              name={item.icone}
+              name={iconName}
               size={16}
               color="#7A7A7A"
             />
@@ -296,7 +208,7 @@ export default function Pesquisa() {
             }}
           >
             <Ionicons
-              name={item.icone}
+              name={iconName}
               size={16}
               color="#FD7509"
             />
@@ -305,7 +217,7 @@ export default function Pesquisa() {
 
         <Animated.Text
           style={[
-            styles.suggestionText,
+            item.tipo === 'usuario' ? styles.suggestionText : styles.suggestionText,
             { color: textColor },
           ]}
         >
@@ -458,7 +370,7 @@ export default function Pesquisa() {
           </Text>
 
           <View style={styles.popularList}>
-            {pesquisasPopulares.map((item, index) => (
+            {populares.map((item, index) => (
               <View
                 key={item.id}
                 style={styles.popularItemWrapper}
@@ -468,7 +380,7 @@ export default function Pesquisa() {
                     styles.popularItem,
                     {
                       backgroundColor:
-                        popularCardColors[index],
+                        popularCardColors[index % popularCardColors.length],
                     },
                   ]}
                 >

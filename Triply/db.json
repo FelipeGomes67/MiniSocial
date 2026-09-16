@@ -5,7 +5,10 @@
       "nome": "Torolho",
       "email": "torolho@email.com",
       "senha": "123",
-      "foto": "https://i.pravatar.cc/150?img=12"
+      "foto": "https://i.pravatar.cc/150?img=12",
+      "favoritePosts": [
+        "3"
+      ]
     },
     {
       "id": "2",
@@ -24,28 +27,81 @@
   ],
   "publicacoes": [
     {
-      "id": "1",
-      "usuarioId": "3",
-      "nomeUsuario": "Pessoa1",
-      "fotoPerfil": "https://i.pravatar.cc/150?img=5",
-      "data": "01/01/2024",
-      "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "imagem": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8",
-      "curtidas": 100,
-      "comentariosCount": 33,
-      "salvamentos": 33
+      "usuarioId": "1",
+      "nomeUsuario": "Torolho",
+      "data": "16/09/2026",
+      "texto": "kjbhgvc",
+      "imagem": null,
+      "curtidas": 0,
+      "comentariosCount": 0,
+      "salvamentos": 0,
+      "id": "Z7d-E0k6kI4"
     },
     {
-      "id": "2",
-      "usuarioId": "3",
-      "nomeUsuario": "Pessoa1",
-      "fotoPerfil": "https://i.pravatar.cc/150?img=5",
-      "data": "01/01/2024",
-      "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "imagem": null,
-      "curtidas": 100,
-      "comentariosCount": 33,
-      "salvamentos": 33
+      "id": "3",
+      "usuarioId": "1",
+      "nomeUsuario": "Torolho",
+      "data": "10/09/2026",
+      "texto": "Um dos lugares mais bonitos que já visitei",
+      "imagem": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk5K39_vxPofhuL7VTK4wAWEWZZNh-XXOha3Kg_ylQu_BOfJyrTYM4W-cvVi8qsyFvbO64zE6Jrxt_1yuAcOHfxqaMYPRnZL4G4NSkD6C4rPZuiPFXt3HCFb5f7tXBtTHCBFbVCMw=s1360-w1360-h1020-rw",
+      "curtidas": 128,
+      "comentariosCount": 14,
+      "salvamentos": 32
+    },
+    {
+      "id": "4",
+      "usuarioId": "1",
+      "nomeUsuario": "Torolho",
+      "data": "08/09/2026",
+      "texto": "Fim de tarde perfeito",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYNQdFe5E0FbCYe83JCXwp6Lg_EgJCMw8F48lDb04Ka9ybtnlcnsKkD90&s=10",
+      "curtidas": 94,
+      "comentariosCount": 8,
+      "salvamentos": 21
+    },
+    {
+      "id": "5",
+      "usuarioId": "1",
+      "nomeUsuario": "Torolho",
+      "data": "03/09/2026",
+      "texto": "Mais uma viagem para guardar na memória",
+      "imagem": "https://palacepraia.com.br/wp-content/uploads/2021/10/viajar-de-aviao.jpeg",
+      "curtidas": 176,
+      "comentariosCount": 23,
+      "salvamentos": 45
+    },
+    {
+      "id": "6",
+      "usuarioId": "1",
+      "nomeUsuario": "Torolho",
+      "data": "28/08/2026",
+      "texto": "Explorando lugares novos e aproveitando cada segundo.",
+      "imagem": "https://cptstatic.s3.amazonaws.com/imagens/enviadas/materias/materia29890/como-se-livrar-do-mato-na-area-de-cultivo-cpt.jpg",
+      "curtidas": 211,
+      "comentariosCount": 31,
+      "salvamentos": 67
+    },
+    {
+      "id": "7",
+      "usuarioId": "1",
+      "nomeUsuario": "Torolho",
+      "data": "21/08/2026",
+      "texto": "A vista valeu cada minuto da viagem",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkOMrtMB3msX0kN_fixiqWQM3e1RJIBIhK5xt-DLTWqReIEkMn-kSaIIA&s=10",
+      "curtidas": 153,
+      "comentariosCount": 17,
+      "salvamentos": 38
+    },
+    {
+      "id": "8",
+      "usuarioId": "1",
+      "nomeUsuario": "Torolho",
+      "data": "15/08/2026",
+      "texto": "Dias que a gente queria poder repetir",
+      "imagem": "https://img.magnific.com/fotos-gratis/feche-a-mulher-trabalhando-no-laptop_23-2149046397.jpg?semt=ais_hybrid&w=740&q=80",
+      "curtidas": 187,
+      "comentariosCount": 26,
+      "salvamentos": 51
     }
   ],
   "comentarios": [
@@ -57,6 +113,40 @@
       "fotoPerfil": "https://i.pravatar.cc/150?img=5",
       "data": "01/01/2024",
       "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "publicacaoId": "2",
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "fotoPerfil": "https://i.pravatar.cc/150?img=1",
+      "data": "16/09/2026",
+      "texto": "iuehfjd",
+      "id": "FPlqEpZwnQQ"
+    },
+    {
+      "publicacaoId": "2",
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "fotoPerfil": "https://i.pravatar.cc/150?img=1",
+      "data": "16/09/2026",
+      "texto": "dfsd",
+      "id": "subwwRiM-SA"
+    },
+    {
+      "publicacaoId": "Z7d-E0k6kI4",
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "data": "16/09/2026",
+      "texto": "lisdncmznsdn",
+      "id": "T6b-sGJpbp0"
+    },
+    {
+      "publicacaoId": "Z7d-E0k6kI4",
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "data": "16/09/2026",
+      "texto": "fidalgo ridiculo :(",
+      "id": "prLkVJsW9ug"
     }
   ],
   "notificacoes": [
@@ -86,15 +176,42 @@
     }
   ],
   "pesquisasRecentes": [
-    { "id": "recent-1", "nome": "Maldivas", "icone": "time-outline" },
-    { "id": "recent-2", "nome": "Hawaii", "icone": "time-outline" }
+    {
+      "id": "recent-1",
+      "nome": "Maldivas",
+      "icone": "time-outline"
+    },
+    {
+      "id": "recent-2",
+      "nome": "Hawaii",
+      "icone": "time-outline"
+    }
   ],
   "sugestoes": [
-    { "id": "sug-1", "nome": "Estados Unidos", "icone": "search-outline", "tipo": "destino" },
-    { "id": "sug-4", "nome": "Fidalgo.k2", "icone": "person-outline", "tipo": "usuario" }
+    {
+      "id": "sug-1",
+      "nome": "Estados Unidos",
+      "icone": "search-outline",
+      "tipo": "destino"
+    },
+    {
+      "id": "sug-4",
+      "nome": "Fidalgo.k2",
+      "icone": "person-outline",
+      "tipo": "usuario"
+    }
   ],
   "pesquisasPopulares": [
-    { "id": "pop-1", "nome": "Fidalgo.k2", "icone": "person-outline" },
-    { "id": "pop-2", "nome": "São Paulo", "icone": "time-outline" }
-  ]
+    {
+      "id": "pop-1",
+      "nome": "Fidalgo.k2",
+      "icone": "person-outline"
+    },
+    {
+      "id": "pop-2",
+      "nome": "São Paulo",
+      "icone": "time-outline"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -7,14 +7,17 @@ import { CameraView, useCameraPermissions } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import Botao from "../../components/botao/botao";
 import * as Location from "expo-location";
+import { router } from "expo-router";
+import api from "../../service/service.js";
 
 export default function Criar() {
   const [texto, setTexto] = useState("");
   const [imagem, setImagem] = useState(null);
   const [cameraAberta, setCameraAberta] = useState(false);
-  const [opcoesAbertas, setOpcoesAbertas] = useState(false); // menu "Tirar foto / Galeria"
+  const [opcoesAbertas, setOpcoesAbertas] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
   const [localizacao, setLocalizacao] = useState("");
+  const [publicando, setPublicando] = useState(false);
   const cameraRef = useRef(null);
 
   async function PegarLocalizacao() {
@@ -22,7 +25,7 @@ export default function Criar() {
       const { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== "granted") {
-        Alert("Permissão para acessar sua localização foi negada.");
+        Alert.alert("Aviso", "Permissão para acessar sua localização foi negada.");
         return;
       }
 
@@ -51,38 +54,56 @@ export default function Criar() {
             return `📍 ${enderecoFormatado}`;
           }
 
-
           return `${textoAtual}\n📍 ${enderecoFormatado}`;
         })
       }
     } catch (error) {
-      console.log("Erro ao pegar localização", erro);
-      alert("Não foi possível obter sua localização.");
-
+      console.log("Erro ao pegar localização", error);
+      Alert.alert("Erro", "Não foi possível obter sua localização.");
     }
   }
 
+  async function publicarPublicacao() {
+    if (!texto.trim()) {
+      Alert.alert("Aviso", "Escreva algo para publicar!");
+      return;
+    }
 
+    try {
+      setPublicando(true);
 
+      const novaPublicacao = {
+        usuarioId: "1",
+        nomeUsuario: "Você",
+        data: new Date().toLocaleDateString("pt-BR"),
+        texto: texto,
+        imagem: imagem || null,
+        curtidas: 0,
+        comentariosCount: 0,
+        salvamentos: 0,
+      };
 
+      await api.post("/publicacoes", novaPublicacao);
 
+      Alert.alert("Sucesso", "Publicação criada com sucesso!");
+      
+      setTexto("");
+      setImagem(null);
+      setLocalizacao("");
 
+      router.replace("/(tabs)/index");
+    } catch (error) {
+      console.error("Erro ao publicar:", error);
+      Alert.alert("Erro", "Não foi possível publicar. Tente novamente.");
+    } finally {
+      setPublicando(false);
+    }
+  }
 
-
-
-
-
-
-
-
-
-
-  // Abre o menu de opções ao tocar em "Imagem"
   function abrirOpcoesImagem() {
     setOpcoesAbertas(true);
   }
 
-  // Opção 1: abrir a câmera
   async function abrirCamera() {
     setOpcoesAbertas(false);
     if (!permission?.granted) {
@@ -100,7 +121,6 @@ export default function Criar() {
     }
   }
 
-  // Opção 2: abrir a galeria
   async function abrirGaleria() {
     setOpcoesAbertas(false);
 
@@ -166,7 +186,11 @@ export default function Criar() {
       )}
 
       <View style={criarStyle.containerBotaoPublicar}>
-        <Botao botao="Publicar"></Botao>
+        <Botao 
+          botao="Publicar"
+          onPress={publicarPublicacao}
+          disabled={publicando}
+        ></Botao>
       </View>
 
       {/* Menu de opções: Tirar foto ou Escolher da galeria */}

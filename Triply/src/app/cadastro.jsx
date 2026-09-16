@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, StyleSheet, Image, TextInput} from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, Image, TextInput, Alert} from "react-native";
 import { cadastroStyle } from "../styles/cadastroStyle";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
@@ -7,12 +7,48 @@ import Botao from "../components/botao/botao";
 import { botaoStyles } from "../components/botao/botaoStyle";
 import { router } from "expo-router";
 import logo from "../../assets/Logo.png";
-import { SafeAreaView } from "react-native-safe-area-context"; // Importação do SafeAreaView
+import { SafeAreaView } from "react-native-safe-area-context";
+import api from "../service/service.js";
 
 export default function Cadastro() {
   const [novoEmail, setNovoEmail] = useState('');
   const [novoNomeCompleto, setNovoNomeCompleto] = useState('');
   const [novaSenha, setNovaSenha] = useState('');
+
+  const cadastrar = async () => {
+    if (!novoNomeCompleto || !novoEmail || !novaSenha) {
+      Alert.alert("Aviso", "Preencha todos os campos!");
+      return;
+    }
+
+    const emailLimpo = novoEmail.trim().toLowerCase();
+
+    try {
+      const usuariosExistentes = await api.get(`/usuarios?email=${emailLimpo}`);
+
+      if (usuariosExistentes.data.length > 0) {
+        Alert.alert("Erro", "Este e-mail já está cadastrado.");
+        return;
+      }
+
+      const novoUsuario = {
+        nome: novoNomeCompleto,
+        email: emailLimpo,
+        senha: novaSenha
+      };
+
+      await api.post("/usuarios", novoUsuario);
+
+      Alert.alert("Sucesso", "Conta criada com sucesso!");
+      router.replace("/login");
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error);
+      Alert.alert(
+        "Erro",
+        "Não foi possível conectar ao servidor. Tente novamente."
+      );
+    }
+  };
 
 
 
@@ -73,14 +109,14 @@ export default function Cadastro() {
 
         </View>
 
-        <TouchableOpacity style={cadastroStyle.button} onPress={() => router.push("/(tabs)")}>
+        <TouchableOpacity style={cadastroStyle.button} onPress={cadastrar}>
           <Text style={cadastroStyle.buttonText}>Criar Conta</Text>
         </TouchableOpacity>
 
         <View style={cadastroStyle.footer}>
         <Text style={cadastroStyle.signupText}>
           Já tem uma conta?{""}
-          <Text style={cadastroStyle.signupLink} onPress={() => router.push("/(tabs)")}>
+          <Text style={cadastroStyle.signupLink} onPress={() => router.push("/login")}>
             Entrar
           </Text>
         </Text>

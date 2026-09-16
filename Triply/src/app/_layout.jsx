@@ -21,7 +21,8 @@ export default function Layout() {
                     <Stack.Screen name="cadastro" />
                     <Stack.Screen name="esqueceuSenha" />
                     <Stack.Screen name="(tabs)" />
-                    <Stack.Sreen  name="preferencia"/>
+                    <Stack.Screen name="pesquisa" />
+                    <Stack.Screen name="preferencia"/>
                 </Stack>
             </ProfileProvider>
         </SafeAreaProvider>
