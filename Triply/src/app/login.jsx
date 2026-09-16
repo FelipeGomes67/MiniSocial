@@ -1,8 +1,11 @@
-<<<<<<< HEAD
-import { Text, View, TouchableOpacity, Image, TextInput, Alert } from "react-native";
-=======
-import { Text, View, TouchableOpacity, Image, TextInput, Alert, ActivityIndicator } from "react-native";
->>>>>>> 0736673ad5263ea073d6001b152bdb95024fadfe
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { loginStyle } from "../styles/loginStyle.js";
 import { router } from "expo-router";
@@ -15,14 +18,9 @@ import api from "../service/service.js";
 import { useUsuario } from "../context/UsuarioContext";
 
 export default function Login() {
-<<<<<<< HEAD
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-=======
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
   const { setUsuario } = useUsuario();
->>>>>>> 0736673ad5263ea073d6001b152bdb95024fadfe
 
   const login = async () => {
     if (!email || !senha) {
@@ -33,38 +31,22 @@ export default function Login() {
     const emailLimpo = email.trim().toLowerCase();
 
     try {
-<<<<<<< HEAD
-      const response = await api.get(`/usuarios?email=${emailLimpo}`);
-
-      if (response.data.length > 0) {
-        const usuarioEncontrado = response.data[0];
-
-        if (usuarioEncontrado.senha === senha) {
-          console.log("Login realizado com sucesso:", usuarioEncontrado);
-          router.replace("/preferencia");
-        } else {
-          Alert.alert("Erro", "Senha incorreta.");
-        }
-      } else {
-        Alert.alert("Erro", "E-mail não encontrado.");
-      }
-    } catch (error) {
-      console.error("Erro na requisição:", error);
-      Alert.alert(
-        "Erro",
-        "Não foi possível conectar ao servidor."
-      );
-=======
-      const response = await api.get('/usuarios');
+      const response = await api.get("/usuarios");
 
       if (response.data && Array.isArray(response.data)) {
         const usuarioEncontrado = response.data.find(
-          (u) => u.email && u.email.trim().toLowerCase() === emailLimpo
+          (u) =>
+            u.email &&
+            u.email.trim().toLowerCase() === emailLimpo
         );
 
         if (usuarioEncontrado) {
           if (usuarioEncontrado.senha === senha) {
-            console.log("Login realizado com sucesso:", usuarioEncontrado);
+            console.log(
+              "Login realizado com sucesso:",
+              usuarioEncontrado
+            );
+
             await setUsuario(usuarioEncontrado);
             router.replace("/preferencia");
           } else {
@@ -76,16 +58,17 @@ export default function Login() {
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
-      Alert.alert("Erro de Conexão", "Não foi possível conectar ao servidor. Verifique a conexão com o IP e o json-server.");
-    } finally {
->>>>>>> 0736673ad5263ea073d6001b152bdb95024fadfe
+
+      Alert.alert(
+        "Erro de Conexão",
+        "Não foi possível conectar ao servidor. Verifique a conexão com o IP e o json-server."
+      );
     }
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
       <View style={loginStyle.container}>
-
         <TouchableOpacity
           onPress={() => router.back()}
           style={loginStyle.buttonBack}
@@ -104,7 +87,6 @@ export default function Login() {
         </Text>
 
         <View style={loginStyle.formContainer}>
-
           <View style={loginStyle.inputContainer}>
             <Text style={[loginStyle.text, loginStyle.fonte]}>
               E-mail
@@ -147,15 +129,10 @@ export default function Login() {
             </Text>
           </TouchableOpacity>
 
-<<<<<<< HEAD
-          {/* AQUI ESTÁ A MUDANÇA */}
           <Botao
             botao="Entrar"
             onPress={login}
           />
-=======
-            <Botao botao="Entrar" onPress={login} />
->>>>>>> 0736673ad5263ea073d6001b152bdb95024fadfe
 
           <View style={loginStyle.dividerContainer}>
             <View style={loginStyle.line} />
@@ -181,7 +158,6 @@ export default function Login() {
               Cadastre-se
             </Text>
           </Text>
-
         </View>
       </View>
     </SafeAreaView>
