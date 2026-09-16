@@ -13,34 +13,34 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const login = async () => {
-    if (!email || !senha) {
-      Alert.alert("Aviso", "Preencha todos os campos!");
-      return;
-    }
+  // const login = async () => {
+  //   if (!email || !senha) {
+  //     Alert.alert("Aviso", "Preencha todos os campos!");
+  //     return;
+  //   }
 
-    const emailLimpo = email.trim().toLowerCase();
+  //   const emailLimpo = email.trim().toLowerCase();
 
-    try {
-        const response = await api.get(`/usuarios?email=${emailLimpo}`);
+  //   try {
+  //       const response = await api.get(`/usuarios?email=${emailLimpo}`);
 
-      if (response.data.length > 0) {
-        const usuarioEncontrado = response.data[0];
+  //     if (response.data.length > 0) {
+  //       const usuarioEncontrado = response.data[0];
 
-        if (usuarioEncontrado.senha === senha) {
-          console.log("Login realizado com sucesso:", usuarioEncontrado);
-          router.replace("/(tabs)");
-        } else {
-          Alert.alert("Erro", "Senha incorreta.");
-        }
-      } else {
-        Alert.alert("Erro", "E-mail não encontrado.");
-      }
-    } catch (error) {
-      console.error("Erro na requisição:", error);
-      Alert.alert("Erro", "Não foi possível conectar ao servidor.");
-    }
-  };
+  //       if (usuarioEncontrado.senha === senha) {
+  //         console.log("Login realizado com sucesso:", usuarioEncontrado);
+  //         router.replace("/(tabs)");
+  //       } else {
+  //         Alert.alert("Erro", "Senha incorreta.");
+  //       }
+  //     } else {
+  //       Alert.alert("Erro", "E-mail não encontrado.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Erro na requisição:", error);
+  //     Alert.alert("Erro", "Não foi possível conectar ao servidor.");
+  //   }
+  // };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
@@ -84,8 +84,7 @@ export default function Login() {
             <Text style={[loginStyle.esqueceuSenha, loginStyle.fonte]}>Esqueceu a senha?</Text>
           </TouchableOpacity>
 
-          {/* 2. Chamando a função de login no onPress */}
-          <Botao botao="Entrar" onPress={login} />
+          <Botao botao="Entrar" onPress={() => router.push("/preferencia")} />
 
           <View style={loginStyle.dividerContainer}>
             <View style={loginStyle.line} />

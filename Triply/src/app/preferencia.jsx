@@ -2,6 +2,7 @@
 // TELA: PREFERÊNCIAS
 // ARQUIVO: app/preferences.jsx
 // ========================================
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -49,7 +50,7 @@ export default function PreferencesScreen({ onNext }) {
             <Text style={styles.title}>preferências</Text>
           </View>
 
-          <TouchableOpacity activeOpacity={0.8} onPress={onNext}>
+          <TouchableOpacity activeOpacity={0.8} onPress={() => router.push("/(tabs)")}>
             <Text style={styles.skip}>Pular</Text>
           </TouchableOpacity>
         </View>
@@ -92,7 +93,7 @@ export default function PreferencesScreen({ onNext }) {
 
       <TouchableOpacity
         style={styles.nextButton}
-        onPress={onNext}
+        onPress={() => router.push("/(tabs)")}
         activeOpacity={0.9}
       >
         <Text style={styles.nextText}>Próximo</Text>
