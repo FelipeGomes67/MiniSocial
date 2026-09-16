@@ -2,9 +2,99 @@
   "usuarios": [
     {
       "id": "1",
-      "name": "Torolho",
-      "email": "torolho@gmail.com",
-      "senha": "senha123"
+      "nome": "Torolho",
+      "email": "torolho@email.com",
+      "senha": "123",
+      "foto": "https://i.pravatar.cc/150?img=12"
+    },
+    {
+      "id": "2",
+      "nome": "Fidalgo.k2",
+      "email": "fidalgo@email.com",
+      "senha": "123",
+      "foto": "https://i.pravatar.cc/150?img=33"
+    },
+    {
+      "id": "3",
+      "nome": "Pessoa1",
+      "email": "pessoa1@email.com",
+      "senha": "123",
+      "foto": "https://i.pravatar.cc/150?img=5"
     }
+  ],
+  "publicacoes": [
+    {
+      "id": "1",
+      "usuarioId": "3",
+      "nomeUsuario": "Pessoa1",
+      "fotoPerfil": "https://i.pravatar.cc/150?img=5",
+      "data": "01/01/2024",
+      "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "imagem": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8",
+      "curtidas": 100,
+      "comentariosCount": 33,
+      "salvamentos": 33
+    },
+    {
+      "id": "2",
+      "usuarioId": "3",
+      "nomeUsuario": "Pessoa1",
+      "fotoPerfil": "https://i.pravatar.cc/150?img=5",
+      "data": "01/01/2024",
+      "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "imagem": null,
+      "curtidas": 100,
+      "comentariosCount": 33,
+      "salvamentos": 33
+    }
+  ],
+  "comentarios": [
+    {
+      "id": "c1",
+      "publicacaoId": "1",
+      "usuarioId": "3",
+      "nomeUsuario": "Pessoa1",
+      "fotoPerfil": "https://i.pravatar.cc/150?img=5",
+      "data": "01/01/2024",
+      "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+  ],
+  "notificacoes": [
+    {
+      "id": "1",
+      "tipo": "comentario",
+      "nomeUsuario": "Torolho",
+      "mensagem": "Comentou em sua Publicação.",
+      "horario": "Ontem às 22:21",
+      "imagemTipo": "comentario"
+    },
+    {
+      "id": "2",
+      "tipo": "seguidor",
+      "nomeUsuario": "Torolho",
+      "mensagem": "Começou a Seguir você!",
+      "horario": "Ontem às 22:21",
+      "imagemTipo": "seguidor"
+    },
+    {
+      "id": "3",
+      "tipo": "curtida",
+      "nomeUsuario": "Torolho",
+      "mensagem": "Curtiu uma Publicação sua!",
+      "horario": "Ontem às 22:21",
+      "imagemTipo": "curtida"
+    }
+  ],
+  "pesquisasRecentes": [
+    { "id": "recent-1", "nome": "Maldivas", "icone": "time-outline" },
+    { "id": "recent-2", "nome": "Hawaii", "icone": "time-outline" }
+  ],
+  "sugestoes": [
+    { "id": "sug-1", "nome": "Estados Unidos", "icone": "search-outline", "tipo": "destino" },
+    { "id": "sug-4", "nome": "Fidalgo.k2", "icone": "person-outline", "tipo": "usuario" }
+  ],
+  "pesquisasPopulares": [
+    { "id": "pop-1", "nome": "Fidalgo.k2", "icone": "person-outline" },
+    { "id": "pop-2", "nome": "São Paulo", "icone": "time-outline" }
   ]
 }
