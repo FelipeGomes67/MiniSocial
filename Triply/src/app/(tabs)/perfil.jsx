@@ -45,32 +45,21 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     async function buscarDadosPerfil() {
-      if (!usuario?.id) return;
+      if (!usuario) return;
       try {
-        setCarregandoPosts(true);
-
         const [resPosts, resSalvos] = await Promise.all([
-          api.get('/publicacoes'),
-          api.get('/salvos').catch(() => ({ data: [] })),
+          api.get(`/publicacoes?usuarioId=${usuario.id}`),
+          api.get(`/salvos?usuarioId=${usuario.id}`).catch(() => ({ data: [] })),
         ]);
 
-        const minhasPublicacoes = (resPosts.data || []).filter(
-          (p) => String(p.usuarioId) === String(usuario.id)
-        );
-
-        const meusSalvos = (resSalvos.data || []).filter(
-          (s) => String(s.usuarioId) === String(usuario.id)
-        );
-
-        setPosts(minhasPublicacoes);
-        setPostsSalvos(meusSalvos);
+        setPosts(resPosts.data || []);
+        setPostsSalvos(resSalvos.data || []);
       } catch (error) {
-        console.error('Erro ao buscar publicações do usuário:', error);
+        console.error("Erro ao buscar publicações do usuário:", error);
       } finally {
         setCarregandoPosts(false);
       }
     }
-
     buscarDadosPerfil();
   }, [usuario]);
 
@@ -78,7 +67,7 @@ export default function ProfileScreen() {
     try {
       await setUsuario(null);
       setSettingsOpen(false);
-      router.replace('/boas-vindas');
+      router.replace("/boas-vindas");
     } catch (error) {
       Alert.alert('Erro', 'Não foi possível encerrar a sessão.');
     }
@@ -116,7 +105,8 @@ export default function ProfileScreen() {
   const columns = 3;
   const itemWidth = Math.floor((width - horizontalPadding - gap * (columns - 1)) / columns);
 
-  const totalPublicacoes = posts.length;
+  // Estatísticas e lista ativa
+  const totalPublicacoes = posts.length > 0 ? posts.length : (usuario.publicacoes ?? 0);
   const totalSeguidores = usuario.seguidores ?? 0;
   const totalSeguindo = usuario.seguindo ?? 0;
 
@@ -173,9 +163,9 @@ export default function ProfileScreen() {
         </View>
 
         {/* BIO */}
-        <Text style={perfilStyle.bio}>{usuario.descricao || 'Sem descrição cadastrada.'}</Text>
+        <Text style={perfilStyle.bio}>{usuario.descricao || "Sem descrição cadastrada."}</Text>
 
-        {/* ABAS */}
+        {/* ABAS: MINHAS PUBLICAÇÕES vs SALVOS */}
         <View style={perfilStyle.selectorRow}>
           <TouchableOpacity
             style={perfilStyle.selectorCell}
@@ -223,15 +213,9 @@ export default function ProfileScreen() {
           ) : (
             listaExibida.map((item) => {
               const imagemUrl = item.imagem || item.publicacao?.imagem;
-              const textoPost = item.texto || item.publicacao?.texto || '';
 
               return (
-                <TouchableOpacity
-                  key={item.id}
-                  activeOpacity={0.8}
-                  style={[perfilStyle.postCard, { width: itemWidth, marginBottom: gap }]}
-                  onPress={() => router.push(item.publicacaoId || item.id)}
-                >
+                <View key={item.id} style={[perfilStyle.postCard, { width: itemWidth, marginBottom: gap }]}>
                   {imagemUrl ? (
                     <Image
                       source={{ uri: imagemUrl }}
@@ -244,23 +228,19 @@ export default function ProfileScreen() {
                         perfilStyle.post,
                         {
                           height: itemWidth,
-                          backgroundColor: '#F3F4F6',
+                          backgroundColor: '#EAEAEA',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          padding: 6,
-                          borderRadius: 8,
+                          padding: 4,
                         },
                       ]}
                     >
-                      <Text
-                        numberOfLines={4}
-                        style={{ fontSize: 11, color: '#333333', textAlign: 'center', fontWeight: '500' }}
-                      >
-                        {textoPost || 'Post sem conteúdo'}
+                      <Text numberOfLines={3} style={{ fontSize: 10, color: '#666', textAlign: 'center' }}>
+                        {item.texto || item.publicacao?.texto || 'Post sem imagem'}
                       </Text>
                     </View>
                   )}
-                </TouchableOpacity>
+                </View>
               );
             })
           )}
@@ -304,19 +284,15 @@ function EditProfile({ usuario, setUsuario, postsCount, onBack }) {
         alert('Precisamos de permissão para acessar suas fotos.');
         return;
       }
-
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        mediaTypes: ['images'],
         allowsEditing: true,
         aspect: [1, 1],
-        quality: 0.7, 
-        base64: true, 
+        quality: 1,
       });
 
       if (!result.canceled && result.assets?.length > 0) {
-        const asset = result.assets[0];
-        const fotoBase64 = `data:image/jpeg;base64,${asset.base64}`;
-        setFoto(fotoBase64);
+        setFoto(result.assets[0].uri);
       }
     } catch (error) {
       alert('Não foi possível selecionar a imagem.');

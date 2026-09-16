@@ -8,8 +8,8 @@
       "senha": "123",
       "seguindo": 1,
       "seguidores": 1,
-      "publicacoes": 6,
-      "descricao": "Gosto de jogos ",
+      "publicacoes": 1,
+      "descricao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
       "foto": "https://i.pravatar.cc/150?img=12"
     },
     {
@@ -20,7 +20,7 @@
       "senha": "123",
       "seguindo": 1,
       "seguidores": 1,
-      "publicacoes": 0,
+      "publicacoes": 1,
       "descricao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
       "foto": "https://i.pravatar.cc/150?img=33"
     },
@@ -32,7 +32,7 @@
       "senha": "123",
       "seguindo": 1,
       "seguidores": 1,
-      "publicacoes": 0,
+      "publicacoes": 1,
       "descricao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
       "foto": "https://i.pravatar.cc/150?img=5"
     },
@@ -44,9 +44,10 @@
       "senha": "123",
       "seguindo": 1,
       "seguidores": 1,
-      "publicacoes": 0,
+      "publicacoes": 1,
       "descricao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
-      "foto": "https://i.pravatar.cc/150?img=8"
+      "foto": "blob:http://localhost:8081/02e3873e-5b7f-47e3-902b-ae9e14ce86a1",
+      "id": "vTT4GRUGZFk"
     }
   ],
   "publicacoes": [
@@ -199,6 +200,22 @@
       "texto": "Post salvo paisagem"
     }
   ],
+  "salvos": [
+    {
+      "id": "s1",
+      "usuarioId": "3",
+      "publicacaoId": "1",
+      "imagem": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8",
+      "texto": "Post salvo praia"
+    },
+    {
+      "id": "s2",
+      "usuarioId": "3",
+      "publicacaoId": "2",
+      "imagem": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+      "texto": "Post salvo paisagem"
+    }
+  ],
   "comentarios": [
     {
       "id": "c1",
@@ -296,6 +313,5 @@
       "nome": "São Paulo",
       "icone": "time-outline"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
