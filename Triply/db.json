@@ -2,14 +2,15 @@
   "usuarios": [
     {
       "id": "1",
-      "nome": "Torolho",
-      "user": "torolhinho",
+      "nome": "Arthur batista ",
+      "user": "Arthurbr-yt",
       "email": "torolho@gmail.com",
       "senha": "123",
-      "foto": "https://i.pravatar.cc/150?img=12",
-      "favoritePosts": [
-        "3"
-      ]
+      "seguindo": 1,
+      "seguidores": 1,
+      "publicacoes": 6,
+      "descricao": "Gosto de jogos ",
+      "foto": "https://i.pravatar.cc/150?img=12"
     },
     {
       "id": "2",
@@ -17,9 +18,10 @@
       "user": "torolhinho.k2",
       "email": "fidalgo@gmail.com",
       "senha": "123",
-      "seguindo": "1",
-      "seguidores": "1",
-      "descricacao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
+      "seguindo": 1,
+      "seguidores": 1,
+      "publicacoes": 0,
+      "descricao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
       "foto": "https://i.pravatar.cc/150?img=33"
     },
     {
@@ -28,35 +30,26 @@
       "user": "torolhinho",
       "email": "pessoa1@gmail.com",
       "senha": "123",
-      "seguindo": "1",
-      "seguidores": "1",
-      "descricacao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
+      "seguindo": 1,
+      "seguidores": 1,
+      "publicacoes": 0,
+      "descricao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
       "foto": "https://i.pravatar.cc/150?img=5"
     },
     {
+      "id": "4",
       "nome": "Felipe",
       "user": "felipegg",
       "email": "felipegg@gmail.com",
       "senha": "123",
-      "seguindo": "0",
-      "seguidores": "0",
-      "descricacao": "Novo membro da comunidade!",
-      "foto": "https://i.pravatar.cc/150?img=60",
-      "id": "vTT4GRUGZFk"
+      "seguindo": 1,
+      "seguidores": 1,
+      "publicacoes": 0,
+      "descricao": "Desenvolvedor e entusiasta de futebol. Torço para o são paulo.",
+      "foto": "https://i.pravatar.cc/150?img=8"
     }
   ],
   "publicacoes": [
-    {
-      "usuarioId": "1",
-      "nomeUsuario": "Torolho",
-      "data": "16/09/2026",
-      "texto": "kjbhgvc",
-      "imagem": null,
-      "curtidas": 0,
-      "comentariosCount": 0,
-      "salvamentos": 0,
-      "id": "Z7d-E0k6kI4"
-    },
     {
       "id": "3",
       "usuarioId": "1",
@@ -122,51 +115,116 @@
       "curtidas": 187,
       "comentariosCount": 26,
       "salvamentos": 51
+    },
+    {
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "data": "16/09/2026",
+      "texto": "e",
+      "imagem": null,
+      "curtidas": 0,
+      "comentariosCount": 0,
+      "salvamentos": 0,
+      "id": "zQpERcGWgl0"
+    },
+    {
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "data": "16/09/2026",
+      "texto": "123",
+      "imagem": null,
+      "curtidas": 0,
+      "comentariosCount": 0,
+      "salvamentos": 0,
+      "id": "fY27qU_rSO0"
+    },
+    {
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "data": "16/09/2026",
+      "texto": "yt",
+      "imagem": null,
+      "curtidas": 0,
+      "comentariosCount": 0,
+      "salvamentos": 0,
+      "id": "uZByCPnaGHo"
+    },
+    {
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "data": "16/09/2026",
+      "texto": "sh",
+      "imagem": null,
+      "curtidas": 0,
+      "comentariosCount": 0,
+      "salvamentos": 0,
+      "id": "8l9YgAXdjw4"
+    },
+    {
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "data": "16/09/2026",
+      "texto": "u",
+      "imagem": null,
+      "curtidas": 0,
+      "comentariosCount": 0,
+      "salvamentos": 0,
+      "id": "B8lnn9nhFSE"
+    },
+    {
+      "usuarioId": "1",
+      "nomeUsuario": "Você",
+      "data": "16/09/2026",
+      "texto": "Torolho",
+      "imagem": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FTriply-004194a3-7378-4c7e-acd6-bf74e4fb0a64/ImagePicker/7fda3913-c973-48a3-abd0-caec46d4d9e3.jpeg",
+      "curtidas": 0,
+      "comentariosCount": 0,
+      "salvamentos": 0,
+      "id": "lrjd1b-l-uI"
+    }
+  ],
+  "salvos": [
+    {
+      "id": "s1",
+      "usuarioId": "3",
+      "publicacaoId": "3",
+      "imagem": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8",
+      "texto": "Post salvo praia"
+    },
+    {
+      "id": "s2",
+      "usuarioId": "3",
+      "publicacaoId": "4",
+      "imagem": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+      "texto": "Post salvo paisagem"
     }
   ],
   "comentarios": [
     {
       "id": "c1",
-      "publicacaoId": "1",
+      "publicacaoId": "3",
       "usuarioId": "3",
       "nomeUsuario": "Pessoa1",
       "fotoPerfil": "https://i.pravatar.cc/150?img=5",
       "data": "01/01/2024",
-      "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "texto": "Lugar incrível! Vale muito a pena."
     },
     {
-      "publicacaoId": "2",
+      "id": "c2",
+      "publicacaoId": "3",
       "usuarioId": "1",
       "nomeUsuario": "Você",
       "fotoPerfil": "https://i.pravatar.cc/150?img=1",
       "data": "16/09/2026",
-      "texto": "iuehfjd",
-      "id": "FPlqEpZwnQQ"
+      "texto": "Com certeza!"
     },
     {
-      "publicacaoId": "2",
-      "usuarioId": "1",
-      "nomeUsuario": "Você",
-      "fotoPerfil": "https://i.pravatar.cc/150?img=1",
-      "data": "16/09/2026",
-      "texto": "dfsd",
-      "id": "subwwRiM-SA"
-    },
-    {
-      "publicacaoId": "Z7d-E0k6kI4",
+      "publicacaoId": "lrjd1b-l-uI",
       "usuarioId": "1",
       "nomeUsuario": "Você",
       "data": "16/09/2026",
-      "texto": "lisdncmznsdn",
-      "id": "T6b-sGJpbp0"
-    },
-    {
-      "publicacaoId": "Z7d-E0k6kI4",
-      "usuarioId": "1",
-      "nomeUsuario": "Você",
-      "data": "16/09/2026",
-      "texto": "fidalgo ridiculo :(",
-      "id": "prLkVJsW9ug"
+      "texto": "Uau que lindo",
+      "id": "qMufopsS070"
     }
   ],
   "notificacoes": [
@@ -183,19 +241,19 @@
       "datahora": "2026-09-16T12:54:00.000Z"
     },
     {
-      "id": "2",
+      "id": "3",
       "tipo": "seguidor",
       "nomeUsuario": "TT67",
       "datahora": "2026-09-16T12:54:00.000Z"
     },
     {
-      "id": "2",
+      "id": "4",
       "tipo": "seguidor",
       "nomeUsuario": "Fidalgo6767",
       "datahora": "2026-09-16T12:54:00.000Z"
     },
     {
-      "id": "3",
+      "id": "5",
       "tipo": "curtida",
       "nomeUsuario": "Fidalgo",
       "datahora": "2026-09-16T12:54:00.000Z"

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_HOST = "172.16.36.36";
+const API_HOST = "192.168.137.1";
 const API_PORT = 3000;
 
 const api = axios.create({

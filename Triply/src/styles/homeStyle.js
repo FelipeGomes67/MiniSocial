@@ -1,16 +1,15 @@
 import { StyleSheet } from "react-native";
 
 export const homeStyle = StyleSheet.create({
-    header: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 20,
-    },
-    
     container: {
-      flex: 1,
+        flex: 1,
         paddingHorizontal: 20,
         paddingVertical: 20,
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 20,
     },
     title: {
         fontSize: 24,
@@ -21,13 +20,12 @@ export const homeStyle = StyleSheet.create({
     image: {
         width: 40,
         height: 40,
-        marginBottom: 'auto',
+        marginBottom: "auto",
     },
-
     botaoPesquisar: {
         alignItems: "center",
         marginTop: 10,
-        marginLeft: 'auto',
+        marginLeft: "auto",
     },
     cardPublicacao: {
         backgroundColor: "#fff",
@@ -36,7 +34,6 @@ export const homeStyle = StyleSheet.create({
         borderRadius: 8,
         padding: 16,
         marginBottom: 20,
-        marginRight: 20,
         flexDirection: "column",
         alignItems: "flex-start",
         width: "100%",
@@ -60,44 +57,51 @@ export const homeStyle = StyleSheet.create({
         alignItems: "center",
         marginRight: 10,
     },
-    infoPerfil: {
-        flexDirection: "column",
-    },
     cardPerfilText: {
         fontWeight: "bold",
         color: "#fff",
+    },
+    infoPerfil: {
+        flexDirection: "column",
     },
     nomePerfil: {
         fontWeight: "bold",
         fontSize: 16,
     },
-    infoPerfil: {
-        flexDirection: "column",
+    nomePerfilData: {
+        fontSize: 14,
+        color: "#686666",
     },
     descricaoPublicacao: {
         fontSize: 16,
         textAlign: "justify",
     },
-    nomePerfilData: {
-        fontSize: 14,
-        color: "#686666",
+    linhaAcoes: {
+        flexDirection: "row",
+        alignItems: "center",
+        width: "100%",
+        marginTop: 14,
     },
     botaoCurtir: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 10,
-        marginRight: "auto",
+        gap: 6,
     },
     botaoComentar: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 10,
-        marginLeft: 10,
+        marginLeft: 16,
+        gap: 6,
     },
     botaoSalvar: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 10,
-        marginLeft: 165,
+        marginLeft: "auto",
+        gap: 6,
     },
+    textoAcao: {
+        fontSize: 14,
+        color: "#000000",
+    },
+    fonte: {},
 });

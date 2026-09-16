@@ -63,7 +63,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
       ) : (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {publicacoes.map((publicacao) => (
             <TouchableOpacity
               key={publicacao.id}
@@ -97,24 +97,24 @@ export default function Home() {
                 {publicacao.texto}
               </Text>
 
-              <View style={homeStyle.botaoCurtir}>
+              <View style={homeStyle.linhaAcoes}>
                 <TouchableOpacity style={homeStyle.botaoCurtir}>
-                  <Ionicons name="heart-outline" size={24} color="#000000" />
-                  <Text style={[homeStyle.fonte]}>{publicacao.curtidas}</Text>
+                  <Ionicons name="heart-outline" size={22} color="#000000" />
+                  <Text style={homeStyle.textoAcao}>{publicacao.curtidas}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={homeStyle.botaoComentar}>
                   <Ionicons
                     name="chatbubble-ellipses-outline"
-                    size={24}
+                    size={22}
                     color="#000000"
                   />
-                  <Text style={[homeStyle.fonte]}>{publicacao.comentariosCount}</Text>
+                  <Text style={homeStyle.textoAcao}>{publicacao.comentariosCount}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={homeStyle.botaoSalvar}>
-                  <Ionicons name="bookmark-outline" size={24} color="#000000" />
-                  <Text style={[homeStyle.fonte]}>{publicacao.salvamentos}</Text>
+                  <Ionicons name="bookmark-outline" size={22} color="#000000" />
+                  <Text style={homeStyle.textoAcao}>{publicacao.salvamentos}</Text>
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>

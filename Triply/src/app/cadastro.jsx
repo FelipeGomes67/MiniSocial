@@ -80,7 +80,7 @@ export default function Cadastro() {
         senha: novaSenha,
         seguindo: "0",
         seguidores: "0",
-        descricacao: "Novo membro da comunidade!",
+        descricao: "Novo membro da comunidade!",
         foto: "https://i.pravatar.cc/150?img=60"
       };
 

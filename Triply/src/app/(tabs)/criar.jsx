@@ -1,5 +1,13 @@
 import React, { useState, useRef } from "react";
-import { Text, View, TouchableOpacity, Image, TextInput, Modal, Alert } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  Modal,
+  Alert,
+} from "react-native";
 import { criarStyle } from "../../styles/criarStyle";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -50,7 +58,7 @@ export default function Criar() {
           .join(", ");
 
         setTexto((textoAtual) => {
-          if (textoAtual.trim() == "") {
+          if (textoAtual.trim() === "") {
             return `📍 ${enderecoFormatado}`;
           }
 
@@ -83,7 +91,9 @@ export default function Criar() {
         salvamentos: 0,
       };
 
-      await api.post("/publicacoes", novaPublicacao);
+      const response = await api.post("/publicacoes", novaPublicacao);
+      
+      const novoId = response.data.id;
 
       Alert.alert("Sucesso", "Publicação criada com sucesso!");
 
@@ -91,7 +101,11 @@ export default function Criar() {
       setImagem(null);
       setLocalizacao("");
 
-      router.replace("/(tabs)/index");
+      // OPÇÃO 1: Voltar para a aba inicial do Feed
+      // router.replace("/(tabs)");
+
+      router.push(`/${novoId}`);
+
     } catch (error) {
       console.error("Erro ao publicar:", error);
       Alert.alert("Erro", "Não foi possível publicar. Tente novamente.");
@@ -145,10 +159,6 @@ export default function Criar() {
 
   return (
     <SafeAreaView style={criarStyle.container}>
-      <TouchableOpacity>
-        <Text style={criarStyle.close}>X</Text>
-      </TouchableOpacity>
-
       <Text style={criarStyle.title}>Nova Publicação</Text>
 
       <View>
@@ -160,14 +170,12 @@ export default function Criar() {
             placeholder="Escreva algo..."
             placeholderTextColor="#9b9b9b"
             multiline={true}
-            maxLength={280}
+            maxLength={500}
             value={texto}
             onChangeText={setTexto}
           />
 
-          <Text style={criarStyle.caracteres}>
-            {texto.length}/280
-          </Text>
+          <Text style={criarStyle.caracteres}>{texto.length}/500</Text>
         </View>
       </View>
 
@@ -188,10 +196,7 @@ export default function Criar() {
             size={24}
             color="#000000"
           />
-
-          <Text style={criarStyle.colorText}>
-            Imagem
-          </Text>
+          <Text style={criarStyle.colorText}>Imagem</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -203,19 +208,16 @@ export default function Criar() {
             size={24}
             color="#000000"
           />
-
-          <Text style={criarStyle.colorText}>
-            Localização
-          </Text>
+          <Text style={criarStyle.colorText}>Localização</Text>
         </TouchableOpacity>
       </View>
 
-      {localizacao && (
+      {localizacao ? (
         <View style={{ marginTop: 15 }}>
           <Text>Localização:</Text>
           <Text>{localizacao}</Text>
         </View>
-      )}
+      ) : null}
 
       <View style={criarStyle.containerBotaoPublicar}>
         <Botao
@@ -246,10 +248,7 @@ export default function Criar() {
                 size={22}
                 color="#000"
               />
-
-              <Text style={criarStyle.textoItemOpcao}>
-                Tirar foto
-              </Text>
+              <Text style={criarStyle.textoItemOpcao}>Tirar foto</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -261,7 +260,6 @@ export default function Criar() {
                 size={22}
                 color="#000"
               />
-
               <Text style={criarStyle.textoItemOpcao}>
                 Escolher da galeria
               </Text>
@@ -271,33 +269,20 @@ export default function Criar() {
               style={criarStyle.itemOpcaoCancelar}
               onPress={() => setOpcoesAbertas(false)}
             >
-              <Text style={criarStyle.textoCancelar}>
-                Cancelar
-              </Text>
+              <Text style={criarStyle.textoCancelar}>Cancelar</Text>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </Modal>
 
-      <Modal
-        visible={cameraAberta}
-        animationType="slide"
-      >
-        <CameraView
-          style={{ flex: 1 }}
-          ref={cameraRef}
-          facing="back"
-        >
+      <Modal visible={cameraAberta} animationType="slide">
+        <CameraView style={{ flex: 1 }} ref={cameraRef} facing="back">
           <View style={criarStyle.camaraControles}>
             <TouchableOpacity
               style={criarStyle.botaoFecharCamera}
               onPress={() => setCameraAberta(false)}
             >
-              <Ionicons
-                name="close"
-                size={32}
-                color="#fff"
-              />
+              <Ionicons name="close" size={32} color="#fff" />
             </TouchableOpacity>
 
             <TouchableOpacity

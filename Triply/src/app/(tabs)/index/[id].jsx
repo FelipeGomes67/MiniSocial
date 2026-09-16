@@ -26,10 +26,14 @@ export default function Publicacao() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    carregarDados();
+    if (id) {
+      carregarDados();
+    }
   }, [id]);
 
   const carregarDados = async () => {
+    if (!id) return;
+
     try {
       setLoading(true);
       setError(null);
@@ -37,14 +41,17 @@ export default function Publicacao() {
       const publiResponse = await api.get(`/publicacoes/${id}`);
       setPublicacao(publiResponse.data);
 
-      const comentariosResponse = await api.get(
-        `/comentarios?publicacaoId=${id}`
-      );
+      try {
+        const comentariosResponse = await api.get(`/comentarios?publicacaoId=${id}`);
+        setComentarios(comentariosResponse.data);
+      } catch (comentErr) {
+        console.warn("Rota /comentarios não encontrada ou sem dados. Inicializando com lista vazia.");
+        setComentarios([]);
+      }
 
-      setComentarios(comentariosResponse.data);
     } catch (err) {
-      console.error("Erro ao carregar dados:", err);
-      setError("Não foi possível carregar a publicação.");
+      console.error(`Erro 404: Publicação com ID "${id}" não existe em /publicacoes.`);
+      setError(`Publicação ID ${id} não encontrada.`);
     } finally {
       setLoading(false);
     }
@@ -67,18 +74,15 @@ export default function Publicacao() {
 
       const response = await api.post("/comentarios", comentarioData);
 
-      setComentarios([
-        ...comentarios,
+      setComentarios((listaAtual) => [
+        ...listaAtual,
         response.data || comentarioData,
       ]);
 
       setNovoComentario("");
     } catch (err) {
       console.error("Erro ao adicionar comentário:", err);
-      Alert.alert(
-        "Erro",
-        "Não foi possível adicionar o comentário."
-      );
+      Alert.alert("Erro", "Não foi possível adicionar o comentário.");
     }
   };
 
@@ -121,9 +125,7 @@ export default function Publicacao() {
               borderRadius: 5,
             }}
           >
-            <Text style={{ color: "#FFF" }}>
-              Voltar
-            </Text>
+            <Text style={{ color: "#FFF" }}>Voltar</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -220,7 +222,7 @@ export default function Publicacao() {
               />
 
               <Text style={[publiStyle.fonte]}>
-                {publicacao.curtidas}
+                {publicacao.curtidas || 0}
               </Text>
             </TouchableOpacity>
 
@@ -232,7 +234,7 @@ export default function Publicacao() {
               />
 
               <Text style={[publiStyle.fonte]}>
-                {publicacao.comentariosCount}
+                {comentarios.length}
               </Text>
             </TouchableOpacity>
 
@@ -244,7 +246,7 @@ export default function Publicacao() {
               />
 
               <Text style={[publiStyle.fonte]}>
-                {publicacao.salvamentos}
+                {publicacao.salvamentos || 0}
               </Text>
             </TouchableOpacity>
           </View>
@@ -259,9 +261,9 @@ export default function Publicacao() {
           Comentários ({comentarios.length})
         </Text>
 
-        {comentarios.map((comentario) => (
+        {comentarios.map((comentario, index) => (
           <View
-            key={comentario.id}
+            key={comentario.id || index}
             style={publiStyle.cardComentario}
           >
             <View style={publiStyle.linhaPerfil}>

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const notificacoesStyle = StyleSheet.create({
- container: {
+  container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
   },
@@ -32,7 +32,7 @@ export const notificacoesStyle = StyleSheet.create({
     alignItems: "center",
 
     paddingHorizontal: 15,
-    paddingVertical: 10 ,
+    paddingVertical: 10,
 
     marginBottom: 20,
   },
