@@ -55,7 +55,7 @@ export default function Criar() {
           }
 
           return `${textoAtual}\n📍 ${enderecoFormatado}`;
-        })
+        });
       }
     } catch (error) {
       console.log("Erro ao pegar localização", error);
@@ -86,7 +86,7 @@ export default function Criar() {
       await api.post("/publicacoes", novaPublicacao);
 
       Alert.alert("Sucesso", "Publicação criada com sucesso!");
-      
+
       setTexto("");
       setImagem(null);
       setLocalizacao("");
@@ -106,16 +106,20 @@ export default function Criar() {
 
   async function abrirCamera() {
     setOpcoesAbertas(false);
+
     if (!permission?.granted) {
       const resposta = await requestPermission();
+
       if (!resposta.granted) return;
     }
+
     setCameraAberta(true);
   }
 
   async function tirarFoto() {
     if (cameraRef.current) {
       const foto = await cameraRef.current.takePictureAsync({ quality: 0.7 });
+
       setImagem(foto.uri);
       setCameraAberta(false);
     }
@@ -125,6 +129,7 @@ export default function Criar() {
     setOpcoesAbertas(false);
 
     const resposta = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
     if (!resposta.granted) return;
 
     const resultado = await ImagePicker.launchImageLibraryAsync({
@@ -148,6 +153,7 @@ export default function Criar() {
 
       <View>
         <Text style={criarStyle.subtitle}>O que você está pensando?</Text>
+
         <View style={criarStyle.cardPublicacao}>
           <TextInput
             style={criarStyle.descricao}
@@ -158,23 +164,49 @@ export default function Criar() {
             value={texto}
             onChangeText={setTexto}
           />
-          <Text style={criarStyle.caracteres}>{texto.length}/280</Text>
+
+          <Text style={criarStyle.caracteres}>
+            {texto.length}/280
+          </Text>
         </View>
       </View>
 
       {imagem && (
-        <Image source={{ uri: imagem }} style={criarStyle.previewImagem} />
+        <Image
+          source={{ uri: imagem }}
+          style={criarStyle.previewImagem}
+        />
       )}
 
       <View style={criarStyle.botoes}>
-        <TouchableOpacity style={criarStyle.botaoImagem} onPress={abrirOpcoesImagem}>
-          <Ionicons name="image-outline" size={24} color="#000000" />
-          <Text style={criarStyle.colorText}>Imagem</Text>
+        <TouchableOpacity
+          style={criarStyle.botaoImagem}
+          onPress={abrirOpcoesImagem}
+        >
+          <Ionicons
+            name="image-outline"
+            size={24}
+            color="#000000"
+          />
+
+          <Text style={criarStyle.colorText}>
+            Imagem
+          </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={criarStyle.botaoLocalizacao} onPress={PegarLocalizacao}>
-          <Ionicons name="location-outline" size={24} color="#000000" />
-          <Text style={criarStyle.colorText}>Localização</Text>
+        <TouchableOpacity
+          style={criarStyle.botaoLocalizacao}
+          onPress={PegarLocalizacao}
+        >
+          <Ionicons
+            name="location-outline"
+            size={24}
+            color="#000000"
+          />
+
+          <Text style={criarStyle.colorText}>
+            Localização
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -186,14 +218,13 @@ export default function Criar() {
       )}
 
       <View style={criarStyle.containerBotaoPublicar}>
-        <Botao 
+        <Botao
           botao="Publicar"
           onPress={publicarPublicacao}
           disabled={publicando}
-        ></Botao>
+        />
       </View>
 
-      {/* Menu de opções: Tirar foto ou Escolher da galeria */}
       <Modal
         visible={opcoesAbertas}
         transparent={true}
@@ -206,35 +237,67 @@ export default function Criar() {
           onPress={() => setOpcoesAbertas(false)}
         >
           <View style={criarStyle.menuOpcoes}>
-            <TouchableOpacity style={criarStyle.itemOpcao} onPress={abrirCamera}>
-              <Ionicons name="camera-outline" size={22} color="#000" />
-              <Text style={criarStyle.textoItemOpcao}>Tirar foto</Text>
+            <TouchableOpacity
+              style={criarStyle.itemOpcao}
+              onPress={abrirCamera}
+            >
+              <Ionicons
+                name="camera-outline"
+                size={22}
+                color="#000"
+              />
+
+              <Text style={criarStyle.textoItemOpcao}>
+                Tirar foto
+              </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={criarStyle.itemOpcao} onPress={abrirGaleria}>
-              <Ionicons name="images-outline" size={22} color="#000" />
-              <Text style={criarStyle.textoItemOpcao}>Escolher da galeria</Text>
+            <TouchableOpacity
+              style={criarStyle.itemOpcao}
+              onPress={abrirGaleria}
+            >
+              <Ionicons
+                name="images-outline"
+                size={22}
+                color="#000"
+              />
+
+              <Text style={criarStyle.textoItemOpcao}>
+                Escolher da galeria
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={criarStyle.itemOpcaoCancelar}
               onPress={() => setOpcoesAbertas(false)}
             >
-              <Text style={criarStyle.textoCancelar}>Cancelar</Text>
+              <Text style={criarStyle.textoCancelar}>
+                Cancelar
+              </Text>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </Modal>
 
-      {/* Tela da câmera */}
-      <Modal visible={cameraAberta} animationType="slide">
-        <CameraView style={{ flex: 1 }} ref={cameraRef} facing="back">
+      <Modal
+        visible={cameraAberta}
+        animationType="slide"
+      >
+        <CameraView
+          style={{ flex: 1 }}
+          ref={cameraRef}
+          facing="back"
+        >
           <View style={criarStyle.camaraControles}>
             <TouchableOpacity
               style={criarStyle.botaoFecharCamera}
               onPress={() => setCameraAberta(false)}
             >
-              <Ionicons name="close" size={32} color="#fff" />
+              <Ionicons
+                name="close"
+                size={32}
+                color="#fff"
+              />
             </TouchableOpacity>
 
             <TouchableOpacity
