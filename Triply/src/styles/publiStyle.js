@@ -1,73 +1,62 @@
 import { StyleSheet } from "react-native";
 
 export const publiStyle = StyleSheet.create({
-
   container: {
     flex: 1,
     paddingVertical: 20,
     paddingHorizontal: 20,
   },
+  scrollContent: {
+    paddingBottom: 20,
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 20,
   },
-
   title: {
     fontSize: 24,
     fontWeight: "bold",
     color: "#FD7509",
-    paddingLeft: 80,
-    paddingRight: 70,
-    // textAlign: "center"
   },
   subtitle: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#000000",
     paddingLeft: 10,
-    
-  },
-  image: {
-    width: 40,
-    height: 40,
-    marginBottom: 'auto',
+    marginBottom: 10,
   },
   cardPublicacao: {
     backgroundColor: "#fff",
     borderColor: "#000000",
     borderWidth: 1,
     borderRadius: 8,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
+    padding: 20,
     marginBottom: 20,
-    marginRight: 20,
     flexDirection: "column",
     alignItems: "flex-start",
     width: "100%",
   },
   cardComentario: {
-      borderColor: "#9B9B9B",
-      backgroundColor: "#fff",
-      borderWidth: 1,
-      borderRadius: 8,
-      paddingVertical: 20,
-      paddingHorizontal: 20,
-      marginBottom: 20,
-      marginRight: 20,
-      flexDirection: "column",
-      alignItems: "flex-start",
-      width: "100%",
-    },
-    cardComentario2: {
-        backgroundColor: "#f5f5f5",
-        borderColor: "#9B9B9B",
-        borderWidth: 1,
-        borderRadius: 8,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
+    borderColor: "#9B9B9B",
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 20,
+    marginBottom: 15,
+    flexDirection: "column",
+    alignItems: "flex-start",
+    width: "100%",
+  },
+  cardComentario2: {
+    backgroundColor: "#f5f5f5",
+    borderColor: "#9B9B9B",
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     marginBottom: 20,
-    marginRight: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -76,11 +65,13 @@ export const publiStyle = StyleSheet.create({
   imagePost: {
     width: "100%",
     height: 200,
-    marginBottom: 10,
+    borderRadius: 6,
+    marginVertical: 10,
   },
   linhaPerfil: {
     flexDirection: "row",
     alignItems: "center",
+    width: "100%",
     marginBottom: 10,
   },
   cardPerfil: {
@@ -88,56 +79,102 @@ export const publiStyle = StyleSheet.create({
     borderRadius: 50,
     width: 50,
     height: 50,
-    justifyContent: "center",
+    justify: "center",
     alignItems: "center",
     marginRight: 10,
   },
   infoPerfil: {
     flexDirection: "column",
-  },
-  cardPerfilText: {
-    fontWeight: "bold",
-    color: "#fff",
+    flex: 1,
+    marginRight: 8,
   },
   nomePerfil: {
     fontWeight: "bold",
     fontSize: 16,
   },
-  infoPerfil: {
-    flexDirection: "column",
+  nomePerfilData: {
+    fontSize: 14,
+    color: "#686666",
+  },
+  containerLocalizacao: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: "auto",
+    maxWidth: "40%",
+    gap: 4,
+  },
+  textoLocalizacao: {
+    fontSize: 14,
+    color: "#686666",
+    flexShrink: 1,
   },
   descricaoPublicacao: {
     fontSize: 16,
     textAlign: "justify",
   },
-  nomePerfilData: {
-    fontSize: 14,
-    color: "#686666",
+  linhaAcoes: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    marginTop: 14,
   },
   botaoCurtir: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
-    marginRight: "auto",
+    gap: 6,
   },
   botaoComentar: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
-    marginLeft: 10,
+    marginLeft: 16,
+    gap: 6,
   },
   botaoSalvar: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
-    marginLeft: 180,
+    marginLeft: "auto",
+    gap: 6,
   },
-  botaoPost: {
-   
-    // // marginTop: 10,
-   
+  textoAcao: {
+    fontSize: 14,
+    color: "#000000",
   },
   fonte: {
     fontFamily: "RedHatText_400Regular",
+  },
+  /* Estilos do Modal / Bottom Sheet */
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    backgroundColor: "#FFF",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    paddingBottom: 30,
+  },
+  modalDragIndicator: {
+    width: 40,
+    height: 5,
+    backgroundColor: "#DDD",
+    borderRadius: 3,
+    alignSelf: "center",
+    marginBottom: 15,
+  },
+  modalOption: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "#EEE",
+    gap: 12,
+  },
+  modalOptionText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#000",
   },
 });

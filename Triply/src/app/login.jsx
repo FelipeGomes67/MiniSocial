@@ -28,7 +28,7 @@ export default function Login() {
   if (carregando) return null;
 
   if (usuario) {
-    return <Redirect href="/(tabs)" />;
+    return <Redirect href="/home" />;
   }
 
 
@@ -58,7 +58,7 @@ export default function Login() {
             );
 
             await setUsuario(usuarioEncontrado);
-            router.replace("/preferencia");
+            router.replace("/home");
           } else {
             Alert.alert("Erro", "Senha incorreta.");
           }

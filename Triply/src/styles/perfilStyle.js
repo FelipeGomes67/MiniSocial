@@ -7,7 +7,7 @@ export const perfilStyle = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    paddingVertical: 20,
+    paddingVertical: 35,
   },
 
   screen: {

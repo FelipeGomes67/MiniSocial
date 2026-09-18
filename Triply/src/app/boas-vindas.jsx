@@ -19,7 +19,7 @@ export default function Index() {
   }
 
   if (usuario) {
-    return <Redirect href="/(tabs)" />;
+    return <Redirect href="/(tabs)/home" />;
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Text,
   View,
@@ -13,31 +13,51 @@ import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
+import * as ImageManipulator from "expo-image-manipulator";
 import Botao from "../../components/botao/botao";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import api from "../../service/service.js";
+import { useUsuario } from "../../context/UsuarioContext";
 
 export default function Criar() {
+  const { usuario } = useUsuario();
+
   const [texto, setTexto] = useState("");
   const [imagem, setImagem] = useState(null);
   const [cameraAberta, setCameraAberta] = useState(false);
   const [opcoesAbertas, setOpcoesAbertas] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
-  const [localizacao, setLocalizacao] = useState("");
+  const [localizacao, setLocalizacao] = useState("Buscando local...");
   const [publicando, setPublicando] = useState(false);
   const cameraRef = useRef(null);
 
-  async function PegarLocalizacao() {
+  useEffect(() => {
+    pegarLocalizacaoAutomatica();
+  }, []);
+
+  async function redimensionarEConverterBase64(uri) {
+    const result = await ImageManipulator.manipulateAsync(
+      uri,
+      [{ resize: { width: 800 } }],
+      { compress: 0.4, format: ImageManipulator.SaveFormat.JPEG, base64: true }
+    );
+    return `data:image/jpeg;base64,${result.base64}`;
+  }
+
+  async function pegarLocalizacaoAutomatica() {
     try {
+      setLocalizacao("Buscando local...");
       const { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== "granted") {
-        Alert.alert("Aviso", "Permissão para acessar sua localização foi negada.");
+        setLocalizacao("São Paulo, SP");
         return;
       }
 
-      const local = await Location.getCurrentPositionAsync({});
+      const local = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
 
       const endereco = await Location.reverseGeocodeAsync({
         latitude: local.coords.latitude,
@@ -46,28 +66,26 @@ export default function Criar() {
 
       if (endereco.length > 0) {
         const dados = endereco[0];
+        const bairro = dados.district || dados.subregion;
+        const cidade = dados.city;
 
-        const enderecoFormatado = [
-          dados.street,
-          dados.streetNumber,
-          dados.district,
-          dados.city,
-          dados.region,
-        ]
-          .filter(Boolean)
-          .join(", ");
+        let enderecoFormatado = "";
 
-        setTexto((textoAtual) => {
-          if (textoAtual.trim() === "") {
-            return `📍 ${enderecoFormatado}`;
-          }
+        if (bairro && cidade) {
+          enderecoFormatado = `${bairro}, ${cidade}`;
+        } else if (cidade) {
+          enderecoFormatado = `${cidade}, ${dados.region || ""}`;
+        } else {
+          enderecoFormatado = dados.street || "São Paulo, SP";
+        }
 
-          return `${textoAtual}\n📍 ${enderecoFormatado}`;
-        });
+        setLocalizacao(enderecoFormatado);
+      } else {
+        setLocalizacao("São Paulo, SP");
       }
     } catch (error) {
-      console.log("Erro ao pegar localização", error);
-      Alert.alert("Erro", "Não foi possível obter sua localização.");
+      console.log("Erro ao pegar localização automática:", error);
+      setLocalizacao("São Paulo, SP");
     }
   }
 
@@ -77,35 +95,46 @@ export default function Criar() {
       return;
     }
 
+    if (!usuario || !usuario.id) {
+      Alert.alert("Erro", "Usuário não autenticado.");
+      return;
+    }
+
     try {
       setPublicando(true);
 
+      // Converte a foto de perfil para Base64 caso seja um URI local (file://)
+      let fotoPerfilBase64 = usuario.foto || null;
+      if (fotoPerfilBase64 && fotoPerfilBase64.startsWith("file://")) {
+        try {
+          fotoPerfilBase64 = await redimensionarEConverterBase64(fotoPerfilBase64);
+        } catch (err) {
+          console.error("Erro ao converter foto de perfil:", err);
+        }
+      }
+
       const novaPublicacao = {
-        usuarioId: "1",
-        nomeUsuario: "Você",
+        usuarioId: String(usuario.id),
+        nomeUsuario: usuario.nome || usuario.user || "Usuário",
+        fotoPerfil: fotoPerfilBase64,
         data: new Date().toLocaleDateString("pt-BR"),
-        texto: texto,
+        texto: texto.trim(),
         imagem: imagem || null,
+        localizacao: localizacao || "São Paulo, SP",
         curtidas: 0,
         comentariosCount: 0,
         salvamentos: 0,
       };
 
       const response = await api.post("/publicacoes", novaPublicacao);
-      
       const novoId = response.data.id;
 
       Alert.alert("Sucesso", "Publicação criada com sucesso!");
 
       setTexto("");
       setImagem(null);
-      setLocalizacao("");
 
-      // OPÇÃO 1: Voltar para a aba inicial do Feed
-      // router.replace("/(tabs)");
-
-      router.push(`/${novoId}`);
-
+      router.push(`/home/${novoId}`);
     } catch (error) {
       console.error("Erro ao publicar:", error);
       Alert.alert("Erro", "Não foi possível publicar. Tente novamente.");
@@ -132,9 +161,10 @@ export default function Criar() {
 
   async function tirarFoto() {
     if (cameraRef.current) {
-      const foto = await cameraRef.current.takePictureAsync({ quality: 0.7 });
-
-      setImagem(foto.uri);
+      const foto = await cameraRef.current.takePictureAsync({ quality: 0.5 });
+      const imagemRedimensionada = await redimensionarEConverterBase64(foto.uri);
+      
+      setImagem(imagemRedimensionada);
       setCameraAberta(false);
     }
   }
@@ -149,11 +179,13 @@ export default function Criar() {
     const resultado = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      quality: 0.7,
+      aspect: [4, 3],
+      quality: 0.5,
     });
 
-    if (!resultado.canceled) {
-      setImagem(resultado.assets[0].uri);
+    if (!resultado.canceled && resultado.assets[0]) {
+      const imagemRedimensionada = await redimensionarEConverterBase64(resultado.assets[0].uri);
+      setImagem(imagemRedimensionada);
     }
   }
 
@@ -201,23 +233,22 @@ export default function Criar() {
 
         <TouchableOpacity
           style={criarStyle.botaoLocalizacao}
-          onPress={PegarLocalizacao}
+          onPress={pegarLocalizacaoAutomatica}
         >
           <Ionicons
             name="location-outline"
             size={24}
             color="#000000"
           />
-          <Text style={criarStyle.colorText}>Localização</Text>
+          <Text
+            style={criarStyle.textoLocalizacao}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {localizacao}
+          </Text>
         </TouchableOpacity>
       </View>
-
-      {localizacao ? (
-        <View style={{ marginTop: 15 }}>
-          <Text>Localização:</Text>
-          <Text>{localizacao}</Text>
-        </View>
-      ) : null}
 
       <View style={criarStyle.containerBotaoPublicar}>
         <Botao

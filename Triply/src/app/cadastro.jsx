@@ -1,59 +1,31 @@
-import { Text, View, TouchableOpacity, StyleSheet, Image, TextInput, Alert} from "react-native";
-import { cadastroStyle } from "../styles/cadastroStyle";
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
-import { router, Redirect } from "expo-router";
-import logo from "../../assets/Logo.png";
+import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import logo from "../../assets/Logo.png";
+import { cadastroStyle } from "../styles/cadastroStyle";
 import api from "../service/service.js";
+import { useUsuario } from "../context/UsuarioContext";
 
 export default function Cadastro() {
-  const [novoEmail, setNovoEmail] = useState('');
-  const [novoNomeCompleto, setNovoNomeCompleto] = useState('');
-  const [novaSenha, setNovaSenha] = useState('');
+  const { setUsuario, carregando } = useUsuario();
+
+  const [novoEmail, setNovoEmail] = useState("");
+  const [novoNomeCompleto, setNovoNomeCompleto] = useState("");
+  const [novaSenha, setNovaSenha] = useState("");
   const [carregandoCadastro, setCarregandoCadastro] = useState(false);
 
-  const cadastrar = async () => {
-    if (!novoNomeCompleto || !novoEmail || !novaSenha) {
-      Alert.alert("Aviso", "Preencha todos os campos!");
-      return;
-    }
-
-    const emailLimpo = novoEmail.trim().toLowerCase();
-
-    try {
-      const usuariosExistentes = await api.get(`/usuarios?email=${emailLimpo}`);
-
-      if (usuariosExistentes.data.length > 0) {
-        Alert.alert("Erro", "Este e-mail já está cadastrado.");
-        return;
-      }
-
-      const novoUsuario = {
-        nome: novoNomeCompleto,
-        email: emailLimpo,
-        senha: novaSenha
-      };
-
-      await api.post("/usuarios", novoUsuario);
-
-      Alert.alert("Sucesso", "Conta criada com sucesso!");
-      router.replace("/login");
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-      Alert.alert(
-        "Erro",
-        "Não foi possível conectar ao servidor. Tente novamente."
-      );
-    }
-  };
-
-
   if (carregando) return null;
-
-  if (usuario) {
-    return <Redirect href="/(tabs)" />;
-  }
 
   const handleCadastro = async () => {
     if (!novoNomeCompleto.trim() || !novoEmail.trim() || !novaSenha.trim()) {
@@ -64,36 +36,45 @@ export default function Cadastro() {
     try {
       setCarregandoCadastro(true);
 
-      const checarEmail = await api.get(`/usuarios?email=${novoEmail.toLowerCase().trim()}`);
+      const emailLimpo = novoEmail.toLowerCase().trim();
+
+      const checarEmail = await api.get(`/usuarios?email=${emailLimpo}`);
       if (checarEmail.data.length > 0) {
         Alert.alert("Erro", "Este e-mail já está em uso.");
-        setCarregandoCadastro(false);
         return;
       }
 
-      const usernameGerado = novoEmail.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+      const usernameGerado = emailLimpo
+        .split("@")[0]
+        .replace(/[^a-z0-9]/g, "");
 
       const novoUsuario = {
         nome: novoNomeCompleto.trim(),
         user: usernameGerado,
-        email: novoEmail.toLowerCase().trim(),
+        email: emailLimpo,
         senha: novaSenha,
-        seguindo: "0",
-        seguidores: "0",
+        seguindo: 0,
+        seguidores: 0,
         descricao: "Novo membro da comunidade!",
-        foto: "https://i.pravatar.cc/150?img=60"
+        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH9qH1e1RhyYOVevyBN5rEWzJ9GbekYDuFQ_aZQlr8cA&s=10",
       };
 
-      const resposta = await api.post('/usuarios', novoUsuario);
+      const resposta = await api.post("/usuarios", novoUsuario);
 
       if (resposta.status === 201 || resposta.status === 200) {
-        await setUsuario(resposta.data);
-
-        router.replace('/preferencia');
+        Alert.alert("Sucesso", "Conta criada com sucesso!", [
+          {
+            text: "OK",
+            onPress: async () => {
+              if (setUsuario) await setUsuario(resposta.data);
+              router.replace("/preferencia");
+            },
+          },
+        ]);
       }
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
-      Alert.alert("Erro", "Não foi possível realizar o cadastro.");
+      Alert.alert("Erro", "Não foi possível realizar o cadastro. Tente novamente.");
     } finally {
       setCarregandoCadastro(false);
     }
@@ -102,8 +83,10 @@ export default function Cadastro() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={cadastroStyle.container}>
-
-        <TouchableOpacity onPress={() => router.back()} style={cadastroStyle.buttonBack}>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          style={cadastroStyle.buttonBack}
+        >
           <Ionicons name="chevron-back-outline" size={28} color="#FF6600" />
         </TouchableOpacity>
 
@@ -149,19 +132,27 @@ export default function Cadastro() {
           </View>
         </View>
 
-        <TouchableOpacity style={cadastroStyle.button} onPress={cadastrar}>
-          <Text style={cadastroStyle.buttonText}>Criar Conta</Text>
+        <TouchableOpacity
+          style={cadastroStyle.button}
+          onPress={handleCadastro}
+          disabled={carregandoCadastro}
+        >
+          {carregandoCadastro ? (
+            <ActivityIndicator color="#FFF" />
+          ) : (
+            <Text style={cadastroStyle.buttonText}>Criar Conta</Text>
+          )}
         </TouchableOpacity>
 
         <View style={cadastroStyle.footer}>
-        <Text style={cadastroStyle.signupText}>
-          Já tem uma conta?{""}
-        </Text>
-          <Text style={cadastroStyle.signupLink} onPress={() => router.push("/login")}>
+          <Text style={cadastroStyle.signupText}>Já tem uma conta? </Text>
+          <Text
+            style={cadastroStyle.signupLink}
+            onPress={() => router.push("/login")}
+          >
             Entrar
           </Text>
         </View>
-
       </View>
     </SafeAreaView>
   );

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const criarStyle = StyleSheet.create({
     container: {
         paddingVertical: 20,
-        paddingHorizoltal: 20,
+        paddingHorizontal: 20,
     },
     close: {
         fontSize: 24,
@@ -21,7 +21,7 @@ export const criarStyle = StyleSheet.create({
     },
     subtitle: {
         fontSize: 16,
-        marginLeft: 30,
+        marginLeft: 20,
         color: "#9b9b9b",
     },
     cardPublicacao: {
@@ -29,7 +29,7 @@ export const criarStyle = StyleSheet.create({
         borderColor: "#686666",
         borderWidth: 1,
         borderRadius: 8,
-        width: "90%",
+        width: "100%",
         height: 200,
         alignSelf: "center",
         justifyContent: "center",
@@ -39,7 +39,7 @@ export const criarStyle = StyleSheet.create({
     },
     descricao: {
         fontSize: 16,
-        color: "#9b9b9b",
+        color: "#000",
         width: "100%",
         height: "100%",
         paddingLeft: 10,
@@ -54,30 +54,35 @@ export const criarStyle = StyleSheet.create({
         right: 10,
     },
     botoes: {
-        color: "#9b9b9b",
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 10,
-        marginLeft: 25,
+        justifyContent: "space-between",
+        marginTop: 15,
+        paddingHorizontal: 5,
+        width: "100%",
     },
     colorText: {
         color: "#9b9b9b",
     },
+    textoLocalizacao: {
+        color: "#9b9b9b",
+        flexShrink: 1,
+    },
     botaoImagem: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 10,
-        marginLeft: 25,
+        gap: 6,
     },
     botaoLocalizacao: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 10,
-        marginLeft: 100,
+        gap: 6,
+        maxWidth: "60%",
+        flexShrink: 1,
     },
     containerBotaoPublicar: {
         marginTop: 25,
-        width: "90%",
+        width: "100%",
         alignSelf: "center",
     },
     previewImagem: {

@@ -46,6 +46,7 @@ export const homeStyle = StyleSheet.create({
     linhaPerfil: {
         flexDirection: "row",
         alignItems: "center",
+        width: "100%",
         marginBottom: 10,
     },
     cardPerfil: {
@@ -63,6 +64,8 @@ export const homeStyle = StyleSheet.create({
     },
     infoPerfil: {
         flexDirection: "column",
+        flex: 1, // Permite ajustar o tamanho dinamicamente sem espremer a localização
+        marginRight: 8,
     },
     nomePerfil: {
         fontWeight: "bold",
@@ -71,6 +74,18 @@ export const homeStyle = StyleSheet.create({
     nomePerfilData: {
         fontSize: 14,
         color: "#686666",
+    },
+    containerLocalizacao: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginLeft: "auto",
+        maxWidth: "40%", // Define um limite máximo para forçar a quebra de linha quando necessário
+        gap: 4,
+    },
+    textoLocalizacao: {
+        fontSize: 14,
+        color: "#686666",
+        flexShrink: 1, 
     },
     descricaoPublicacao: {
         fontSize: 16,

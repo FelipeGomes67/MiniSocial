@@ -14,5 +14,5 @@ export default function PrivateRoute({ children }) {
     );
   }
 
-  return usuario ? children : <Redirect href="/login" />;
+  return usuario ? children : <Redirect href="/boas-vindas" />;
 }

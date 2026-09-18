@@ -1,6 +1,18 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { useUsuario } from '../context/UsuarioContext';
+import api from '../service/service';
 
 const interests = [
   ['Praias paradisíacas', '🏝️'],
@@ -23,39 +35,83 @@ const interests = [
   ['Esportes e atividades', '🏄'],
 ];
 
-export default function PreferencesScreen({ onNext }) {
-  const [selected, setSelected] = useState(new Set());
+export default function PreferencesScreen() {
+  const { usuario, setUsuario } = useUsuario();
+  const [saving, setSaving] = useState(false);
 
-  const toggle = (name) =>
+  const [selected, setSelected] = useState(
+    new Set(usuario?.preferencias || [])
+  );
+
+  const toggle = (name) => {
     setSelected((current) => {
       const next = new Set(current);
       next.has(name) ? next.delete(name) : next.add(name);
       return next;
     });
+  };
+
+  const salvarEAvancar = async (pular = false) => {
+    if (!usuario?.id) {
+      router.replace('/home');
+      return;
+    }
+
+    try {
+      setSaving(true);
+      const listaPreferencias = pular ? [] : Array.from(selected);
+
+      const usuarioAtualizado = {
+        ...usuario,
+        preferencias: listaPreferencias,
+      };
+
+      const response = await api.put(`/usuarios/${usuario.id}`, usuarioAtualizado);
+      await setUsuario(response.data);
+
+      if (router.canGoBack()) {
+        router.back();
+      } else {
+        router.replace('/home');
+      }
+    } catch (error) {
+      console.error('Erro ao salvar preferências:', error);
+      Alert.alert('Erro', 'Não foi possível salvar suas preferências.');
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={Prefereniastyle.container}>
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={Prefereniastyle.scrollView}
+        contentContainerStyle={Prefereniastyle.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.header}>
-          <View style={styles.titleWrap}>
-            <Text style={styles.title}>Escolha suas</Text>
-            <Text style={styles.title}>preferências</Text>
+        <View style={Prefereniastyle.header}>
+          <View style={Prefereniastyle.titleWrap}>
+            <Text style={Prefereniastyle.title}>Escolha suas</Text>
+            <Text style={Prefereniastyle.title}>preferências</Text>
           </View>
 
-          <TouchableOpacity activeOpacity={0.8} onPress={() => router.push("/(tabs)")}>
-            <Text style={styles.skip}>Pular</Text>
-          </TouchableOpacity>
+          {/* O botão 'Pular' só é exibido no fluxo de primeiro acesso (cadastro) */}
+          {!router.canGoBack() && (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => salvarEAvancar(true)}
+              disabled={saving}
+            >
+              <Text style={Prefereniastyle.skip}>Pular</Text>
+            </TouchableOpacity>
+          )}
         </View>
 
-        <Text style={styles.subtitle}>
+        <Text style={Prefereniastyle.subtitle}>
           Encontre experiências que combinam com você!
         </Text>
 
-        <View style={styles.chipsWrap}>
+        <View style={Prefereniastyle.chipsWrap}>
           {interests.map(([name, icon]) => {
             const active = selected.has(name);
 
@@ -67,16 +123,16 @@ export default function PreferencesScreen({ onNext }) {
                 accessibilityRole="button"
                 accessibilityState={{ selected: active }}
                 style={[
-                  styles.chip,
-                  active && styles.activeChip,
+                  Prefereniastyle.chip,
+                  active && Prefereniastyle.activeChip,
                 ]}
               >
-                <Text style={styles.icon}>{icon}</Text>
+                <Text style={Prefereniastyle.icon}>{icon}</Text>
 
                 <Text
                   style={[
-                    styles.chipText,
-                    active && styles.activeText,
+                    Prefereniastyle.chipText,
+                    active && Prefereniastyle.activeText,
                   ]}
                 >
                   {name}
@@ -88,43 +144,45 @@ export default function PreferencesScreen({ onNext }) {
       </ScrollView>
 
       <TouchableOpacity
-        style={styles.nextButton}
-        onPress={() => router.push("/(tabs)")}
+        style={[Prefereniastyle.nextButton, saving && { opacity: 0.7 }]}
+        onPress={() => salvarEAvancar(false)}
         activeOpacity={0.9}
+        disabled={saving}
       >
-        <Text style={styles.nextText}>Avançar para o App</Text>
+        {saving ? (
+          <ActivityIndicator color="#FFFFFF" />
+        ) : (
+          <Text style={Prefereniastyle.nextText}>
+            {router.canGoBack() ? 'Salvar Alterações' : 'Avançar para o App'}
+          </Text>
+        )}
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
+const Prefereniastyle = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-
   scrollView: {
     flex: 1,
   },
-
   scrollContent: {
     paddingHorizontal: 18,
     paddingTop: 18,
     paddingBottom: 90,
   },
-
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     marginTop: 8,
   },
-
   titleWrap: {
     flex: 1,
   },
-
   title: {
     color: '#101010',
     fontSize: 32,
@@ -132,21 +190,18 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     letterSpacing: -0.8,
   },
-
   skip: {
     color: '#8F8F8F',
     fontSize: 13,
     fontWeight: '500',
     marginTop: 6,
   },
-
   subtitle: {
     marginTop: 14,
     color: '#8B8B8B',
     fontSize: 13,
     fontWeight: '400',
   },
-
   chipsWrap: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -155,7 +210,6 @@ const styles = StyleSheet.create({
     rowGap: 10,
     paddingBottom: 16,
   },
-
   chip: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -169,35 +223,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     shadowColor: '#000000',
     shadowOpacity: 0.05,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 1,
   },
-
   activeChip: {
     backgroundColor: '#FFF1E7',
     borderColor: '#FD7509',
   },
-
   icon: {
     fontSize: 16,
     marginRight: 8,
   },
-
   chipText: {
     color: '#1F1F1F',
     fontSize: 12,
     fontWeight: '600',
     letterSpacing: -0.2,
   },
-
   activeText: {
     color: '#FD7509',
   },
-
   nextButton: {
     position: 'absolute',
     bottom: 12,
@@ -209,7 +255,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   nextText: {
     color: '#FFFFFF',
     fontSize: 18,
